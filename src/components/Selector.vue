@@ -7,7 +7,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-            設定檔一
+            Select your asteroids
           </button>
         </h2>
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
@@ -16,13 +16,12 @@
               <div class="col-3" style="padding-bottom: 1%;"
               v-for="(item, index) in [1,2,3,4,5,6,7,8,9,10]"
               :key=index>
-                <div class="card hoverable_card">
+                <div class="card">
+                  <img class="card-img-top" src="https://www.vaisala.com/sites/default/files/styles/16_9_liftup_extra_large/public/images/LIFT-Mars%20the%20Red%20Planet-1600x900.jpg?itok=YXq-Cv1K" alt="Card image cap">
                   <div class="card-body">
-                    <h5 class="card-title">資料名稱</h5>
-                    <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <h5 class="card-title">Mars</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a> -->
+                    <a href="#" class="btn btn-link">Know more</a>
                   </div>
                 </div>
               </div>
@@ -33,7 +32,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-            Accordion Item #2
+            Change Parameter
           </button>
         </h2>
         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
@@ -45,7 +44,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingThree">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-            Accordion Item #3
+            Final Check
           </button>
         </h2>
         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
@@ -55,6 +54,10 @@
         </div>
       </div>
     </div>
+    <div class="text-center">
+      <button type="button" class="btn btn-success">Start Render</button>
+    </div>
+
   </div>
 </template>
 <script>
