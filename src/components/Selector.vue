@@ -61,8 +61,15 @@
   </div>
 </template>
 <script>
+// Option 2: Import just the parts you need.
+import { Scene } from 'three';
+
+const scene = new Scene();
 export default {
-  name: "Selector"
+  name: "Selector",
+  mounted () {
+    console.log(scene)
+  }
 }
 </script>
 <style lang="">

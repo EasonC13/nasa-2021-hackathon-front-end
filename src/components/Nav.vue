@@ -8,10 +8,10 @@
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li class="nav-item">
-          <a class="nav-link link-dark" aria-current="page" href="#">選取資料</a>
+          <router-link class="nav-link link-dark" aria-current="page" to="Selector">選取資料</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link link-dark" href="#">第二個功能</a>
+          <router-link class="nav-link link-dark" to="rendering">Rendering</router-link>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -10,11 +10,14 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/selector' },
+    {
+      path: '/selector',
       name: 'Selector',
       component: Selector
     },
     {
-      path: '/Rendering',
+      path: '/rendering',
       name: 'Rendering',
       component: Rendering
     }

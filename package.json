@@ -12,6 +12,7 @@
   "dependencies": {
     "@vue/composition-api": "^1.2.2",
     "echarts": "^5.2.1",
+    "three": "^0.128.0",
     "vue": "^2.5.2",
     "vue-echarts": "^6.0.0",
     "vue-router": "^3.0.1"
