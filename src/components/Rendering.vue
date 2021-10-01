@@ -14,6 +14,11 @@
         </div>
       </div>
     </div>
+    <div class="col-12">timeline</div>
+    <div class="row">
+      <div class="col-6">關於行星與LightCurve的文字資料</div>
+      <div class="col-6">小行星的3D Model 顯示或者是高清圖片</div>
+    </div>
   </div>
 </template>
 <script>
