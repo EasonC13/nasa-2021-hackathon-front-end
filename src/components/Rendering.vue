@@ -12,7 +12,8 @@
         <div class="row">
           <div class="col-12 col-sm-12 sub">
             model
-            <img class="w-75" src="https://i.imgur.com/FECuMyW.jpg">
+            <img class="w-75" :src="asteroids_image_url">
+            
           </div>
           <div @mouseover="mouseover" @mouseleave="monseleave" class="col-12 col-sm-12 sub">
             <v-chart :option="lightcurve_option"/>
@@ -34,7 +35,9 @@
             In astronomy, a light curve is a graph of light intensity of a celestial object or region, as a function of time.
           </div>
         </div>
-        <div class="col-6 sub">小行星的3D Model 顯示或者是高清圖片</div>
+        <div class="col-6 sub">小行星的3D Model 顯示或者是高清圖片
+          <img class="w-75" :src="asteroids_image_url">
+        </div>
         
       </div>
       <button @click="mouseover"></button>
@@ -51,6 +54,7 @@ export default {
   data() {
     return {
       description: localStorage["description"],
+      asteroids_image_url: localStorage["url"],
       lightcurve_option: {
         title: {
           text: "Light curve",
