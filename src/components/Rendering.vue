@@ -29,8 +29,6 @@
 </template>
 <script>
 import VChart from "vue-echarts";
-import * as echarts from 'echarts';
-
 
 export default {
   name: "Rendering",
