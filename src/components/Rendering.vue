@@ -22,9 +22,6 @@
       </div>
     </div>
     <div class="container">
-      <div class="col-12 sub">
-        <!-- <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option" @click="onclick"/> -->
-      </div>
       <div class="row">
         <div class="col-6 sub">
           關於此行星
@@ -86,7 +83,7 @@ export default {
             }
           },
           min: 0,
-          max: 180
+          max: 360
         },
         yAxis: {
           name: "brightness gain",
@@ -96,10 +93,7 @@ export default {
         series: [
           {
             symbolSize: 10,
-            data: [
-                    [0,0],
-                    [1,1]
-                  ],
+            data: [],
             type: 'scatter'
           }
         ]
@@ -118,6 +112,10 @@ export default {
   },
   mounted () {
     this.time = setInterval(this.change, 100);
+
+    //Compute
+
+    this.lightcurve_option.series[0].data = [[100, 2], [200,3]];
   }
 }
 
