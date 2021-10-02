@@ -35,9 +35,26 @@
         </div>
       </div>
       <div v-if="step==1">
-        <p>Now your astroid is
-          <a :href="asteroids[select_index].read_more">{{asteroids[select_index].name}}</a>
-          </p>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="d-inline">
+                <label for="">Rough</label>
+                <div class="d-inline">
+                  <input id="" type="range" value="1" min="0.08" max="3" step="0.01">
+                  <span class="range-value"><span class="range-val" contenteditable="true">1</span><span class="unit">單位</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <p class="h5">Now your astroid is
+                <a :href="target_asteroid.read_more">{{target_asteroid.name}}</a>
+              </p>
+              <img :src="target_asteroid.image_url" alt="Card image cap">
+            </div>
+          </div>
+        </div>
+
 
       </div>
       <div v-if="step==2">
@@ -53,9 +70,11 @@ import { Scene } from 'three';
 const scene = new Scene();
 export default {
   name: "Selector",
+  components: {
+  },
   data () {
     return {
-      step: 0,
+      step: 1,
       step_instructions: [
         "Select your asteroids",
         "Specify Parameter",
@@ -63,6 +82,24 @@ export default {
       ],
       asteroids : require("../assets/available_asteroids.json"),
       select_index: 0,
+      parameterForm: {
+        rough: 0,
+        rigid: 0,
+        parallel: {
+          sun_light: true,
+          asteroid_light: true,
+        },
+        self_rotation_direction: {
+          x: 0,
+          y: 0,
+          z: 0,
+        },
+      }
+    }
+  },
+  computed: {
+    target_asteroid: function(){
+      return this.asteroids[this.select_index]
     }
   },
   mounted () {
@@ -93,5 +130,9 @@ export default {
 
   .card_selected{
     border:3px solid red
+  }
+
+  .config{
+    display: inline-block;
   }
 </style>
