@@ -98,7 +98,7 @@
                         Period
                         </div>
                           <div class="d-inline">
-                            <input v-model="param.rotate_period" id="" type="range" value="1" min="0" max="10" step="0.5" :disabled="false">
+                            <input v-model="param.rotate_period" id="" type="range" value="1" min="1" max="10" step="0.5" :disabled="false">
                             <span class="range-value"><span class="range-val" contenteditable="false">
                               {{param.rotate_period}}
                             </span><span class="unit">hour</span></span>
@@ -119,13 +119,13 @@
                           <i class="bi bi-chevron-down"></i>
                         </button>
                         <div class="h4 d-inline" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Position
+                        Perihelion Distance
                         </div>
                         <div class="d-inline">
                           <input v-model="param.avg_semi_major_axis" id="" type="range" value="1" min="1" max="5" step="1" :disabled="false">
                           <span class="range-value"><span class="range-val" contenteditable="false">
                             {{param.avg_semi_major_axis}}
-                          </span><span class="unit"></span></span>
+                          </span><span class="unit">km</span></span>
                         </div>
                         </div>
                     </h3>
@@ -149,7 +149,7 @@
                             <input v-model="param.radius" id="" type="range" value="1" min="1" max="360" step="0.01" :disabled="false">
                             <span class="range-value"><span class="range-val" contenteditable="false">
                               {{param.radius}}
-                            </span><span class="unit">°</span></span>
+                            </span><span class="unit">km</span></span>
                           </div>
                         </div>
                     </h3>
@@ -194,7 +194,7 @@ export default {
   },
   data () {
     return {
-      step: 1,
+      step: 0,
       step_instructions: [
         "Select your asteroids",
         "Specify Parameter",
@@ -208,6 +208,7 @@ export default {
         rotate_period: 1,
         avg_semi_major_axis: 0,
         radius: 1,
+        absolute_magnitude: 0,
       }
     }
   },
