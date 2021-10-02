@@ -68,6 +68,25 @@ function initAnimate(data) {
   let dt = 1;
   let period = 180;
   let now = 0;
+  let scale = 1;
+
+  function caculateMagnitude(pixels) {
+    let AU = 149597870.7;
+    let perihelion = 2 * AU; // need to add
+    let albedo = 1; // need to add
+    let Dbs = Math.abs(perihelion - AU);
+
+    let normalize_factor = scale;
+
+    let AREA =
+      Math.pow(50, 2) * 230400 * pixels * Math.pow(normalize_factor, -2);
+    let d = Math.pow(AREA / 4 / Math.PI, 0.5);
+    let H = -26.74 - 5 * Math.log10((Math.pow(albedo, 0.5) * d) / 2 / AU);
+    let m = H + 5 * Math.log10((perihelion * Dbs) / Math.pow(AU, 2));
+    console.log(m);
+    return m;
+  }
+  // console.log(caculateMagnitude(230400));
 
   function countPixel() {
     let size = renderer.domElement;
@@ -106,7 +125,8 @@ function initAnimate(data) {
 
     // console.log(whitePixal, allPixal);
     if (now < 360 && whitePixal > 0) {
-      data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
+      // data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
+      data.push([now++, caculateMagnitude(whitePixal)]);
     }
   }
 
@@ -196,7 +216,7 @@ function initAnimate(data) {
   const objLoader = new OBJLoader();
   objLoader.load("/static/objs/kleo.obj", (obj) => {
     mainOBJ = obj;
-    obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+    obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
     scene.add(obj);
     addHelper(obj, false);
   });
