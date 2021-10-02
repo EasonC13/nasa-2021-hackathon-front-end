@@ -63,8 +63,8 @@ function initAnimate(data) {
   let canvas;
   let renderer;
   let mainOBJ;
-  let theta = 60;
-  let phi = 50;
+  let theta = 0;
+  let phi = 90;
   let dt = 1;
   let period = 180;
   let now = 0;
@@ -73,6 +73,9 @@ function initAnimate(data) {
     let size = renderer.domElement;
     let width = size.width;
     let height = size.height;
+
+    if (width == 0 || height == 0) return;
+
     let gl = canvas.getContext("webgl2", {
       preserveDrawingBuffer: true,
     });
@@ -101,9 +104,10 @@ function initAnimate(data) {
           Math.sqrt(Math.pow(255, 2) + Math.pow(255, 2) + Math.pow(255, 2));
     }
 
-    console.log(whitePixal, allPixal);
-    if(now < 360)
-      data.push([now++, whitePixal / 407682 * 20]);
+    // console.log(whitePixal, allPixal);
+    if (now < 360 && whitePixal > 0) {
+      data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
+    }
   }
 
   function addLight() {
@@ -124,6 +128,16 @@ function initAnimate(data) {
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     camera.position.set(0, 100, 0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
+  }
+
+  function addHelper(obj, visible) {
+    var helper = new THREE.BoxHelper(obj, 0xff0000);
+    helper.update();
+    // If you want a visible bounding box
+    if (visible) scene.add(helper);
+    var box3 = new THREE.Box3();
+    box3.setFromObject(helper); // or from mesh, same answer
+    camera.position.set(0, box3.max.y + 100, 0);
   }
 
   function animation() {
@@ -178,14 +192,13 @@ function initAnimate(data) {
 
   addCamera();
   addLight();
-  // addControls();
-  // addAxes()
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/cube.obj", (obj) => {
+  objLoader.load("/static/objs/kleo.obj", (obj) => {
     mainOBJ = obj;
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
+    addHelper(obj, false);
   });
   countPixel();
   requestAnimationFrame(render);
@@ -233,6 +246,16 @@ function initModel() {
     scene.add(axesHelper);
   }
 
+  function addHelper(obj, visible) {
+    var helper = new THREE.BoxHelper(obj, 0xff0000);
+    helper.update();
+    // If you want a visible bounding box
+    if (visible) scene.add(helper);
+    var box3 = new THREE.Box3();
+    box3.setFromObject(helper); // or from mesh, same answer
+    camera.position.set(0, box3.max.y + 100, 0);
+  }
+
   function caculateScale(obj) {
     const box = new THREE.Box3().setFromObject(obj);
     const x = box.max.x - box.min.x;
@@ -276,10 +299,11 @@ function initModel() {
   addAxes();
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/cube.obj", (obj) => {
+  objLoader.load("/static/objs/kleo.obj", (obj) => {
     mainOBJ = obj;
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
+    addHelper(obj, true);
   });
   requestAnimationFrame(render);
 }
@@ -358,10 +382,6 @@ export default {
     //Compute
     initAnimate(this.lightcurve_option.series[0].data);
     initModel();
-
-    // setInterval(function(){console.log(this.lightcurve_option.series[0].data)}.bind(this), 100)
-
-    console.log(this.lightcurve_option.series[0].data);
   },
 };
 </script>
