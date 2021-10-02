@@ -235,6 +235,7 @@ export default {
       if(this.step === 1){
         localStorage["description"] = this.asteroids[this.select_index].description;
         localStorage["url"] = this.asteroids[this.select_index].image_url;
+        this.$router.push('/rendering');
       }else{
         this.step += 1
       }
