@@ -1,22 +1,26 @@
 <template>
   <div class="container">
     <div class="row">
-      
       <div class="col-8 main">
         <div>
-          <img class="w-75" src="https://i.imgur.com/FECuMyW.jpg">
+          <!-- <img class="w-75" src="https://i.imgur.com/FECuMyW.jpg"> -->
+          <canvas id="animate"></canvas>
         </div>
-        real_time_rendering
+        <!-- real_time_rendering -->
       </div>
       <div class="col-4">
         <div class="row">
           <div class="col-12 col-sm-12 sub">
-            model
-            <img class="w-75" :src="asteroids_image_url">
-            
+            <!-- model
+            <img class="w-75" :src="asteroids_image_url"> -->
+            <canvas id="model"></canvas>
           </div>
-          <div @mouseover="mouseover" @mouseleave="monseleave" class="col-12 col-sm-12 sub">
-            <v-chart :option="lightcurve_option"/>
+          <div
+            @mouseover="mouseover"
+            @mouseleave="monseleave"
+            class="col-12 col-sm-12 sub"
+          >
+            <v-chart :option="lightcurve_option" />
           </div>
           <!-- <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option"/> -->
         </div>
@@ -32,25 +36,265 @@
           <div>
             LightCurve
             <p></p>
-            In astronomy, a light curve is a graph of light intensity of a celestial object or region, as a function of time.
+            In astronomy, a light curve is a graph of light intensity of a
+            celestial object or region, as a function of time.
           </div>
         </div>
-        <div class="col-6 sub">小行星的3D Model 顯示或者是高清圖片
-          <img class="w-75" :src="asteroids_image_url">
+        <div class="col-6 sub">
+          小行星的3D Model 顯示或者是高清圖片
+          <img class="w-75" :src="asteroids_image_url" />
         </div>
-        
       </div>
       <button @click="mouseover"></button>
     </div>
   </div>
 </template>
 <script>
-import * as echarts from 'echarts';
+import * as echarts from "echarts";
+import * as THREE from "three";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
+function initAnimate() {
+  const MAXSIZE = 50;
+  let scene;
+  let camera;
+  let canvas;
+  let renderer;
+  let mainOBJ;
+  let theta = 60;
+  let phi = 50;
+  let dt = 1;
+  let period = 180;
+
+  function countPixel() {
+    let size = renderer.domElement;
+    let width = size.width;
+    let height = size.height;
+    let gl = canvas.getContext("webgl2", {
+      preserveDrawingBuffer: true,
+    });
+    let pixels = new Uint8Array(width * height * 4);
+    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+    let imageData = new ImageData(new Uint8ClampedArray(pixels), width, height);
+
+    const allPixal = imageData.data.length / 4;
+    let whitePixal = 0;
+
+    for (let index = 0; index < imageData.data.length; index += 4) {
+      const rgba = [
+        imageData.data[index],
+        imageData.data[index + 1],
+        imageData.data[index + 2],
+        imageData.data[index + 3] / 255,
+      ];
+      if (rgba[0] == 0 && rgba[1] == 0 && rgba[2] == 0) continue;
+      whitePixal +=
+        1 -
+        Math.sqrt(
+          Math.pow(255 - rgba[0], 2) +
+            Math.pow(255 - rgba[1], 2) +
+            Math.pow(255 - rgba[2], 2)
+        ) /
+          Math.sqrt(Math.pow(255, 2) + Math.pow(255, 2) + Math.pow(255, 2));
+    }
+
+    console.log(whitePixal, allPixal);
+  }
+
+  function addLight() {
+    const color = 0xffffff;
+    const intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(0, 100, 0);
+    light.target.position.set(0, -100, 0);
+    scene.add(light);
+    scene.add(light.target);
+  }
+
+  function addCamera() {
+    const fov = 45;
+    const aspect = 2;
+    const near = 0.01;
+    const far = 1000;
+    camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.position.set(0, 100, 0);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+  }
+
+  function addControls() {
+    const controls = new OrbitControls(camera, canvas);
+    controls.update();
+  }
+
+  function addAxes() {
+    const axesHelper = new THREE.AxesHelper(100);
+    scene.add(axesHelper);
+  }
+
+  function animation() {
+    if (mainOBJ) {
+      let axis = new THREE.Vector3(
+        Math.cos(phi) * Math.sin(theta),
+        Math.sin(phi) * Math.sin(theta),
+        Math.cos(theta)
+      );
+      let rad = (dt * 2 * Math.PI) / period;
+      mainOBJ.rotateOnAxis(axis, rad);
+    }
+  }
+
+  function caculateScale(obj) {
+    const box = new THREE.Box3().setFromObject(obj);
+    const x = box.max.x - box.min.x;
+    const y = box.max.y - box.min.y;
+    const z = box.max.z - box.min.z;
+    const longest = Math.max(x, y, z);
+    return MAXSIZE / longest;
+  }
+
+  function resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
+  }
+
+  function render() {
+    if (resizeRendererToDisplaySize(renderer)) {
+      const canvas = renderer.domElement;
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+    }
+    animation();
+    renderer.render(scene, camera);
+    countPixel();
+    requestAnimationFrame(render);
+  }
+
+  canvas = document.querySelector("#animate");
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+  });
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color("black");
+
+  addCamera();
+  addLight();
+  // addControls();
+  // addAxes()
+
+  const objLoader = new OBJLoader();
+  objLoader.load("/static/objs/kleo.obj", (obj) => {
+    mainOBJ = obj;
+    obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+    scene.add(obj);
+  });
+  countPixel();
+  requestAnimationFrame(render);
+}
+
+function initModel() {
+  const MAXSIZE = 50;
+  let scene;
+  let camera;
+  let canvas;
+  let renderer;
+  let mainOBJ;
+  let theta = 60;
+  let phi = 50;
+  let dt = 1;
+  let period = 180;
+
+  function addLight() {
+    const color = 0xffffff;
+    const intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(0, 100, 0);
+    light.target.position.set(0, -100, 0);
+    scene.add(light);
+    scene.add(light.target);
+  }
+
+  function addCamera() {
+    const fov = 45;
+    const aspect = 2;
+    const near = 0.01;
+    const far = 1000;
+    camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.position.set(0, 100, 0);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+  }
+
+  function addControls() {
+    const controls = new OrbitControls(camera, canvas);
+    controls.update();
+  }
+
+  function addAxes() {
+    const axesHelper = new THREE.AxesHelper(100);
+    scene.add(axesHelper);
+  }
+
+  function caculateScale(obj) {
+    const box = new THREE.Box3().setFromObject(obj);
+    const x = box.max.x - box.min.x;
+    const y = box.max.y - box.min.y;
+    const z = box.max.z - box.min.z;
+    const longest = Math.max(x, y, z);
+    return MAXSIZE / longest;
+  }
+
+  function resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
+  }
+
+  function render() {
+    if (resizeRendererToDisplaySize(renderer)) {
+      const canvas = renderer.domElement;
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+    }
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+  }
+  
+  canvas = document.querySelector("#model");
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+  });
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color("black");
+
+  addCamera();
+  addLight();
+  addControls();
+  addAxes()
+
+  const objLoader = new OBJLoader();
+  objLoader.load("/static/objs/kleo.obj", (obj) => {
+    mainOBJ = obj;
+    obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+    scene.add(obj);
+  });
+  requestAnimationFrame(render);
+}
 
 export default {
   name: "Rendering",
-  components: {
-  },
+  components: {},
   data() {
     return {
       description: localStorage["description"],
@@ -58,71 +302,77 @@ export default {
       lightcurve_option: {
         title: {
           text: "Light curve",
-          left: "center"
+          left: "center",
         },
         tooltip: {
-          triggerOn: 'none',
+          triggerOn: "none",
           position: function (pt) {
             return [pt[0], 130];
-          }
+          },
         },
         height: 250,
         xAxis: {
           name: "Rational phase",
-          title: '12',
+          title: "12",
           axisPointer: {
             value: 0,
             snap: false,
             lineStyle: {
-              color: '#7581BD',
-              width: 2
+              color: "#7581BD",
+              width: 2,
             },
             label: {
               show: true,
-              backgroundColor: '#7581BD'
+              backgroundColor: "#7581BD",
             },
             handle: {
               show: true,
-              color: '#7581BD'
-            }
+              color: "#7581BD",
+            },
           },
           min: 0,
-          max: 360
+          max: 360,
         },
         yAxis: {
           name: "brightness gain",
           min: -20,
-          max: 20
+          max: 20,
         },
         series: [
           {
             symbolSize: 10,
             data: [],
-            type: 'scatter'
-          }
-        ]
+            type: "scatter",
+          },
+        ],
       },
     };
-  },methods: {
-    change: function() {
-      this.lightcurve_option.xAxis.axisPointer.value = (this.lightcurve_option.xAxis.axisPointer.value + 1)%180;
+  },
+  methods: {
+    change: function () {
+      this.lightcurve_option.xAxis.axisPointer.value =
+        (this.lightcurve_option.xAxis.axisPointer.value + 1) % 180;
     },
-    mouseover: function() {
+    mouseover: function () {
       clearInterval(this.time);
     },
-    monseleave: function(){
+    monseleave: function () {
       this.time = setInterval(this.change, 100);
-    }
+    },
   },
-  mounted () {
+  mounted() {
     this.time = setInterval(this.change, 100);
 
     //Compute
+    initAnimate();
+    initModel();
 
-    this.lightcurve_option.series[0].data = [[100, 2], [200,3]];
-  }
-}
-
+    this.lightcurve_option.series[0].data = [
+      [100, 2],
+      [200, 3],
+    ];
+  },
+};
 </script>
 <style scoped>
 .main {
@@ -133,5 +383,17 @@ export default {
 .sub {
   height: 400px;
   border: solid;
+}
+
+#animate {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#model {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 </style>
