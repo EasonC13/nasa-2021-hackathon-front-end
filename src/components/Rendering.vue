@@ -351,7 +351,7 @@ export default {
   methods: {
     change: function () {
       this.lightcurve_option.xAxis.axisPointer.value =
-        (this.lightcurve_option.xAxis.axisPointer.value + 1) % 180;
+        (this.lightcurve_option.xAxis.axisPointer.value + 1) % 360;
     },
     mouseover: function () {
       clearInterval(this.time);
