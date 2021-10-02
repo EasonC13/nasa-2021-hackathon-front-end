@@ -56,7 +56,7 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-function initAnimate() {
+function initAnimate(data) {
   const MAXSIZE = 50;
   let scene;
   let camera;
@@ -67,6 +67,7 @@ function initAnimate() {
   let phi = 50;
   let dt = 1;
   let period = 180;
+  let now = 0;
 
   function countPixel() {
     let size = renderer.domElement;
@@ -101,6 +102,8 @@ function initAnimate() {
     }
 
     console.log(whitePixal, allPixal);
+    if(now < 360)
+      data.push([now++, whitePixal / 407682 * 20]);
   }
 
   function addLight() {
@@ -123,16 +126,6 @@ function initAnimate() {
     camera.lookAt(new THREE.Vector3(0, 0, 0));
   }
 
-  function addControls() {
-    const controls = new OrbitControls(camera, canvas);
-    controls.update();
-  }
-
-  function addAxes() {
-    const axesHelper = new THREE.AxesHelper(100);
-    scene.add(axesHelper);
-  }
-
   function animation() {
     if (mainOBJ) {
       let axis = new THREE.Vector3(
@@ -140,8 +133,7 @@ function initAnimate() {
         Math.sin(phi) * Math.sin(theta),
         Math.cos(theta)
       );
-      let rad = (dt * 2 * Math.PI) / period;
-      mainOBJ.rotateOnAxis(axis, rad);
+      mainOBJ.rotateOnAxis(axis, Math.PI / 180);
     }
   }
 
@@ -190,7 +182,7 @@ function initAnimate() {
   // addAxes()
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/kleo.obj", (obj) => {
+  objLoader.load("/static/objs/cube.obj", (obj) => {
     mainOBJ = obj;
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
@@ -270,7 +262,7 @@ function initModel() {
     renderer.render(scene, camera);
     requestAnimationFrame(render);
   }
-  
+
   canvas = document.querySelector("#model");
   renderer = new THREE.WebGLRenderer({
     canvas,
@@ -281,10 +273,10 @@ function initModel() {
   addCamera();
   addLight();
   addControls();
-  addAxes()
+  addAxes();
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/kleo.obj", (obj) => {
+  objLoader.load("/static/objs/cube.obj", (obj) => {
     mainOBJ = obj;
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
@@ -364,13 +356,12 @@ export default {
     this.time = setInterval(this.change, 100);
 
     //Compute
-    initAnimate();
+    initAnimate(this.lightcurve_option.series[0].data);
     initModel();
 
-    this.lightcurve_option.series[0].data = [
-      [100, 2],
-      [200, 3],
-    ];
+    // setInterval(function(){console.log(this.lightcurve_option.series[0].data)}.bind(this), 100)
+
+    console.log(this.lightcurve_option.series[0].data);
   },
 };
 </script>
