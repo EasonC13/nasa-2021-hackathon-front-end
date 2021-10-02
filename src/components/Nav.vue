@@ -18,7 +18,7 @@
             其他功能
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item disabled" href="#">待補充</a></li>
+            <li><router-link class="dropdown-item" to="scene_test">scene_test</router-link></li>
             <li><a class="dropdown-item disabled" href="#">待補充</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item disabled" href="#">待補充</a></li>
