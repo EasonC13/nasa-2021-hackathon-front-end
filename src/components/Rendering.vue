@@ -1,27 +1,28 @@
 <template>
   <div class="container">
     <div class="row">
-      <v-chart class="chart col-8" :option="option" />
+      
+      <div class="col-8 main">
+        <div>
+          <img class="w-75" src="https://i.imgur.com/FECuMyW.jpg">
+        </div>
+        real_time_rendering
+      </div>
       <div class="col-4">
         <div class="row">
-          <div class="col-12 col-sm-12 model">
+          <div class="col-12 col-sm-12 sub">
             model
             <img class="w-75" src="https://i.imgur.com/FECuMyW.jpg">
           </div>
-          <div class="col-12 col-sm-12 real_time_rendering">
-            <div>
-              <img class="w-75" src="https://i.imgur.com/FECuMyW.jpg">
-            </div>
-            real_time_rendering
-          </div>
+          <v-chart class="col-12 col-sm-12 sub" :option="option" />
         </div>
       </div>
     </div>
     <div class="container">
-      <div class="col-12">timeline</div>
+      <div class="col-12 sub">timeline</div>
       <div class="row">
-        <div class="col-6">關於行星與LightCurve的文字資料</div>
-        <div class="col-6">小行星的3D Model 顯示或者是高清圖片</div>
+        <div class="col-6 sub">關於行星與LightCurve的文字資料</div>
+        <div class="col-6 sub">小行星的3D Model 顯示或者是高清圖片</div>
       </div>
     </div>
   </div>
@@ -43,7 +44,7 @@ export default {
           text: "Light curve",
           left: "center"
         },
-        height: 450,
+        height: 400,
         xAxis: {},
         yAxis: {},
   series: [
@@ -83,11 +84,13 @@ export default {
 
 </script>
 <style scoped>
-.chart {
-  height: 550px;
+.main {
+  height: 800px;
+  border: solid;
 }
 
-.model, .real_time_rendering {
-  height: 200px;
+.sub {
+  height: 400px;
+  border: solid;
 }
 </style>
