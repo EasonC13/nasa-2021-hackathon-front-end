@@ -74,7 +74,7 @@ export default {
   },
   data () {
     return {
-      step: 1,
+      step: 0,
       step_instructions: [
         "Select your asteroids",
         "Specify Parameter",
@@ -89,7 +89,7 @@ export default {
           sun_light: true,
           asteroid_light: true,
         },
-        self_rotation_direction: {
+        self_rotation_axis_direction: {
           x: 0,
           y: 0,
           z: 0,
