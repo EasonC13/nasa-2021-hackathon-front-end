@@ -14,12 +14,14 @@
             model
             <img class="w-75" src="https://i.imgur.com/FECuMyW.jpg">
           </div>
-          <v-chart class="col-12 col-sm-12 sub" :option="option" />
+          <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option" />
         </div>
       </div>
     </div>
     <div class="container">
-      <div class="col-12 sub">timeline</div>
+      <div class="col-12 sub">
+        <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option" />
+      </div>
       <div class="row">
         <div class="col-6 sub">
           關於行星的文字資料
@@ -33,6 +35,7 @@
         </div>
         <div class="col-6 sub">小行星的3D Model 顯示或者是高清圖片</div>
       </div>
+      <!-- <button @click="change"></button> -->
     </div>
   </div>
 </template>
@@ -47,18 +50,40 @@ export default {
   data() {
     return {
       description: localStorage[""],
-      option: {
+      lightcurve_option: {
         title: {
           text: "Light curve",
           left: "center"
         },
-        height: 300,
-        xAxis: [{
+        tooltip: {
+          triggerOn: 'none',
+          position: function (pt) {
+            return [pt[0], 130];
+          }
+        },
+        height: 250,
+        xAxis: {
           name: "Rational phase",
           title: '12',
-          min: 0.0,
-          max: 1.0
-        }],
+          axisPointer: {
+            value: 0,
+            snap: true,
+            lineStyle: {
+              color: '#7581BD',
+              width: 2
+            },
+            label: {
+              show: true,
+              backgroundColor: '#7581BD'
+            },
+            handle: {
+              show: true,
+              color: '#7581BD'
+            }
+          },
+          min: 0,
+          max: 180
+        },
         yAxis: {
           name: "brightness gain",
           min: -20,
@@ -68,14 +93,27 @@ export default {
           {
             symbolSize: 10,
             data: [
-                    [0,0]
-                    [20,1]
+                    [0,0],
+                    [1,1]
                   ],
-                  type: 'scatter'
-            }
+            type: 'scatter'
+          },
+          {
+            symbolSize: 10,
+            data: [[2,0]],
+            type: 'scatter'
+          }
         ]
-      }
+      },
     };
+  },methods: {
+    change() {
+      this.lightcurve_option.xAxis.axisPointer.value = (this.lightcurve_option.xAxis.axisPointer.value + 1)%180;
+      console.log(this.lightcurve_option.xAxis.axisPointer.value);
+    }
+  },
+  mounted () {
+    timeTicket = setInterval(this.change, 100);
   }
 }
 
