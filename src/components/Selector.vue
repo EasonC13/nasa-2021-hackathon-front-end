@@ -209,7 +209,7 @@ export default {
         avg_semi_major_axis: 0,
         radius: 1,
         absolute_magnitude: 0,
-      }
+      },
     }
   },
   computed: {
@@ -266,4 +266,5 @@ export default {
     outline: none;
     box-shadow: none;
   }
+
 </style>
