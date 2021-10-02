@@ -14,13 +14,16 @@
             model
             <img class="w-75" src="https://i.imgur.com/FECuMyW.jpg">
           </div>
-          <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option" />
+          <div @mouseover="mouseover" @mouseleave="monseleave" class="col-12 col-sm-12 sub">
+            <v-chart :option="lightcurve_option"/>
+          </div>
+          <!-- <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option"/> -->
         </div>
       </div>
     </div>
     <div class="container">
       <div class="col-12 sub">
-        <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option" />
+        <!-- <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option" @click="onclick"/> -->
       </div>
       <div class="row">
         <div class="col-6 sub">
@@ -34,8 +37,9 @@
           </div>
         </div>
         <div class="col-6 sub">小行星的3D Model 顯示或者是高清圖片</div>
+        
       </div>
-      <!-- <button @click="change"></button> -->
+      <button @click="mouseover"></button>
     </div>
   </div>
 </template>
@@ -45,7 +49,6 @@ import * as echarts from 'echarts';
 export default {
   name: "Rendering",
   components: {
-    
   },
   data() {
     return {
@@ -67,7 +70,7 @@ export default {
           title: '12',
           axisPointer: {
             value: 0,
-            snap: true,
+            snap: false,
             lineStyle: {
               color: '#7581BD',
               width: 2
@@ -97,23 +100,23 @@ export default {
                     [1,1]
                   ],
             type: 'scatter'
-          },
-          {
-            symbolSize: 10,
-            data: [[2,0]],
-            type: 'scatter'
           }
         ]
       },
     };
   },methods: {
-    change() {
+    change: function() {
       this.lightcurve_option.xAxis.axisPointer.value = (this.lightcurve_option.xAxis.axisPointer.value + 1)%180;
-      console.log(this.lightcurve_option.xAxis.axisPointer.value);
+    },
+    mouseover: function() {
+      clearInterval(this.time);
+    },
+    monseleave: function(){
+      this.time = setInterval(this.change, 100);
     }
   },
   mounted () {
-    timeTicket = setInterval(this.change, 100);
+    this.time = setInterval(this.change, 100);
   }
 }
 
