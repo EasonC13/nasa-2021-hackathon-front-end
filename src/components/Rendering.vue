@@ -28,12 +28,12 @@
   </div>
 </template>
 <script>
-import VChart from "vue-echarts";
+import * as echarts from 'echarts';
 
 export default {
   name: "Rendering",
   components: {
-    VChart
+    
   },
   data() {
     return {
@@ -42,7 +42,7 @@ export default {
           text: "Light curve",
           left: "center"
         },
-        height: 400,
+        height: 300,
         xAxis: {},
         yAxis: {},
   series: [
