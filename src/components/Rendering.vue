@@ -21,7 +21,16 @@
     <div class="container">
       <div class="col-12 sub">timeline</div>
       <div class="row">
-        <div class="col-6 sub">關於行星與LightCurve的文字資料</div>
+        <div class="col-6 sub">
+          關於行星的文字資料
+
+          {{ description }}
+          <div>
+            LightCurve
+            <p></p>
+            In astronomy, a light curve is a graph of light intensity of a celestial object or region, as a function of time.
+          </div>
+        </div>
         <div class="col-6 sub">小行星的3D Model 顯示或者是高清圖片</div>
       </div>
     </div>
@@ -37,43 +46,33 @@ export default {
   },
   data() {
     return {
+      description: localStorage[""],
       option: {
         title: {
           text: "Light curve",
           left: "center"
         },
         height: 300,
-        xAxis: {},
-        yAxis: {},
-  series: [
-    {
-      symbolSize: 10,
-      data: [
-              [10.0, 8.04],
-              [8.07, 6.95],
-              [13.0, 7.58],
-              [9.05, 8.81],
-              [11.0, 8.33],
-              [14.0, 7.66],
-              [13.4, 6.81],
-              [10.0, 6.33],
-              [14.0, 8.96],
-              [12.5, 6.82],
-              [9.15, 7.2],
-              [11.5, 7.2],
-              [3.03, 4.23],
-              [12.2, 7.83],
-              [2.02, 4.47],
-              [1.05, 3.33],
-              [4.05, 4.96],
-              [6.03, 7.24],
-              [12.0, 6.26],
-              [12.0, 8.84],
-              [7.08, 5.82],
-              [5.02, 5.68]
-            ],
-            type: 'scatter'
-          }
+        xAxis: [{
+          name: "Rational phase",
+          title: '12',
+          min: 0.0,
+          max: 1.0
+        }],
+        yAxis: {
+          name: "brightness gain",
+          min: -20,
+          max: 20
+        },
+        series: [
+          {
+            symbolSize: 10,
+            data: [
+                    [0,0]
+                    [20,1]
+                  ],
+                  type: 'scatter'
+            }
         ]
       }
     };
