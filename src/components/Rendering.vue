@@ -27,9 +27,10 @@
       </div>
       <div class="row">
         <div class="col-6 sub">
-          關於行星的文字資料
-
-          {{ description }}
+          關於此行星
+          <p>
+            {{ description }}
+          </p>
           <div>
             LightCurve
             <p></p>
@@ -52,7 +53,7 @@ export default {
   },
   data() {
     return {
-      description: localStorage[""],
+      description: localStorage["description"],
       lightcurve_option: {
         title: {
           text: "Light curve",

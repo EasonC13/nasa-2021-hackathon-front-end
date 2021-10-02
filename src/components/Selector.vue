@@ -232,7 +232,11 @@ export default {
       this.step -= 1
     },
     nextStep(){
-      this.step += 1
+      if(this.step === 1){
+        localStorage["description"] = this.asteroids[this.select_index].description;
+      }else{
+        this.step += 1
+      }
     },
     pass(e){
       console.log(e)

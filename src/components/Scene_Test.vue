@@ -7,9 +7,9 @@
 const axios = require('axios');
 import * as THREE from 'three';
 var OBJLoader = require('three-obj-loader');
-OBJLoader(THREE);
-
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+
+OBJLoader(THREE);
 
 const MAXSIZE = 50;
 let scene;
@@ -153,15 +153,15 @@ export default {
     // addControls();
     // addAxes()
 
-    let objLoader = new THREE.OBJLoader();
-    objLoader.load("/static/objs/kleo.obj", (obj) => {
-      mainOBJ = obj;
-      console.log(obj)
-      obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
-      scene.add(obj);
-    });
-    countPixel();
-    requestAnimationFrame(render);
+    // let objLoader = new THREE.OBJLoader();
+    // objLoader.load("/static/objs/kleo.obj", (obj) => {
+    //   mainOBJ = obj;
+    //   console.log(obj)
+    //   obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+    //   scene.add(obj);
+    // });
+    // countPixel();
+    // requestAnimationFrame(render);
   },
   methods: {
 
