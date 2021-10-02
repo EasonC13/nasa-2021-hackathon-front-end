@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="" id="accordionPanelsStayOpenExample">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
       <div class="accordion-item" id="select_asteroid">
         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">

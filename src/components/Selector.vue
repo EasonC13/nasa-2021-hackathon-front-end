@@ -1,19 +1,20 @@
 <template>
   <div class="container">
     <div>
-      <p class="h4">目前選取項目：</p>
-    </div>
-    <div class="accordion" id="accordionPanelsStayOpenExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-            Select your asteroids
-          </button>
+      <div>
+        <h2 class="">
+            {{step_instructions[step]}}
+            <div class="float-end">
+              <button class="btn btn-secondary" v-if="step!=0" @click="backStep">Back</button>
+              <button class="btn btn-primary me-2" @click="nextStep">Next</button>
+            </div>
         </h2>
-        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-          <div class="accordion-body">
-            <div class="row">
-              <div class="col-3" style="padding-bottom: 1%;"
+      </div>
+      <div v-if="step==0">
+        <div>
+          <div class="overflow-scroll">
+            <div class="row" style="height: 75vh">
+              <div class="col-md-4 col-sm-12 col-lg-3" style="padding-bottom: 1%;"
               v-for="(asteroid, index) in asteroids"
               :key=index @click="select(index)">
                 <div class="card" :class="{
@@ -33,35 +34,16 @@
           </div>
         </div>
       </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-            Change Parameter
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-          <div class="accordion-body">
-            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-            Final Check
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-          <div class="accordion-body">
-            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="text-center">
-      <button type="button" class="btn btn-success">Start Render</button>
-    </div>
+      <div v-if="step==1">
+        <p>Now your astroid is
+          <a :href="asteroids[select_index].read_more">{{asteroids[select_index].name}}</a>
+          </p>
 
+      </div>
+      <div v-if="step==2">
+
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -73,8 +55,14 @@ export default {
   name: "Selector",
   data () {
     return {
+      step: 0,
+      step_instructions: [
+        "Select your asteroids",
+        "Specify Parameter",
+        "Final Check"
+      ],
       asteroids : require("../assets/available_asteroids.json"),
-      select_index: -1,
+      select_index: 0,
     }
   },
   mounted () {
@@ -87,7 +75,12 @@ export default {
       }else{
         this.select_index = index
       }
-
+    },
+    backStep(){
+      this.step -= 1
+    },
+    nextStep(){
+      this.step += 1
     }
   }
 }
