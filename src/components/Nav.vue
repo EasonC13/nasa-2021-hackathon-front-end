@@ -8,6 +8,9 @@
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li class="nav-item">
+          <router-link class="nav-link link-dark" aria-current="page" to="About">About</router-link>
+        </li>
+        <li class="nav-item">
           <router-link class="nav-link link-dark" aria-current="page" to="Selector">選取資料</router-link>
         </li>
         <li class="nav-item">
@@ -18,7 +21,7 @@
             其他功能
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item disabled" href="#">待補充</a></li>
+            <li><router-link class="dropdown-item" to="scene_test">scene_test</router-link></li>
             <li><a class="dropdown-item disabled" href="#">待補充</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item disabled" href="#">待補充</a></li>
