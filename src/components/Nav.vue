@@ -8,6 +8,9 @@
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li class="nav-item">
+          <router-link class="nav-link link-dark" aria-current="page" to="About">About</router-link>
+        </li>
+        <li class="nav-item">
           <router-link class="nav-link link-dark" aria-current="page" to="Selector">選取資料</router-link>
         </li>
         <li class="nav-item">

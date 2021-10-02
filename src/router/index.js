@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Selector from '@/components/Selector'
 import Rendering from '@/components/Rendering'
 import scene_test from "@/components/Scene_Test"
+import About from "@/components/About"
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/selector',
       name: 'Selector',
       component: Selector
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     },
     {
       path: '/rendering',
