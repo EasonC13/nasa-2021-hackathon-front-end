@@ -55,6 +55,15 @@
             <p></p>
             In astronomy, a light curve is a graph of light intensity of a
             celestial object or region, as a function of time.
+            <p></p>
+            <p>
+            <strong>x Axis</strong><br/>
+            We use A number (from zero to one) representing the angle in a periodic pattern. X Axis is time in period unit. 
+            </p>
+            <p>
+            <strong>y Axis</strong><br/>
+            Apparent magnitude ($m$) is a measure of the brightness of a star or other astronomical object observed from Earth.
+            </p>
           </div>
         </div>
         <div class="col-4 sub">
