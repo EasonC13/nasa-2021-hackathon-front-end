@@ -159,7 +159,7 @@ export default {
     let filename="Vesta.obj"
     // filename = 'Toutatis_hirestoutatis.obj'
     console.log("QQQ")
-    let objLoader = new THREE.OBJLoader();
+    // let objLoader = new THREE.OBJLoader();
 
     // fetch(path+filename).then((x)=> x.text().then(x => console.log(x)))
 
