@@ -620,18 +620,22 @@
             <div class="col-sm-12 col-md-6">
               <div class="accordion" id="Parameter">
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="intro_headingOne">
-                    <button
-                      class="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
+                  <button class="btn  w-100 text-start clearfix" id="intro_headingOne" data-bs-toggle="collapse"
                       data-bs-target="#intro_collapseOne"
                       aria-expanded="true"
-                      aria-controls="intro_collapseOne"
-                    >
-                      {{ target_asteroid["#"] + target_asteroid.Name }}
-                    </button>
+                      aria-controls="intro_collapseOne">
+                  <h2 class="accordion-header float-start" v-if='target_asteroid["#"]!=undefined'>
+
+                      {{ target_asteroid["#"] + " " + target_asteroid.Name }}
+
                   </h2>
+                  <h2 class="accordion-header float-start" v-if='target_asteroid["#"]==undefined'>
+
+                      {{ target_asteroid.Name }}
+
+                  </h2>
+                  <i class="bi bi-question-circle float-end h2"></i>
+                  </button>
                   <div
                     id="intro_collapseOne"
                     class="accordion-collapse collapse"
@@ -652,8 +656,8 @@
                       after the first mention when a name is repeated in running
                       text. In addition, names can be proposed by the asteroid’s
                       discoverer, within guidelines established by the
-                      International Astronomical Union.
-                      <a href="https://en.wikipedia.org/wiki/Asteroid">ref</a>
+                      International Astronomical Union. <a target="_blank"
+                      class="" href="https://en.wikipedia.org/wiki/Asteroid">(know more)</a>
                     </div>
                   </div>
                 </div>
