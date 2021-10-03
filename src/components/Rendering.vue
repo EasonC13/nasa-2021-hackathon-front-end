@@ -24,33 +24,36 @@
             <img class="w-75" :src="asteroids_image_url"> -->
             <canvas id="model"></canvas>
           </div>
+          <div v-if="!flag">
+            計算中
+          </div>
           <div
             @mouseover="mouseover"
             @mouseleave="monseleave"
             class="col-12 col-sm-12 sub"
+            v-if="flag"
           >
-            <v-chart :option="lightcurve_option" />
+            <v-chart :option="lightcurve_option"/>
           </div>
-          <!-- <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option"/> -->
         </div>
       </div>
     </div>
     <div class="">
       <div class="row">
-        <div class="col-6 sub">
+        <div class="col-8 sub">
           <p class='h2'>About</p>
 
           <p>
             {{ target_asteroid.Description }}
           </p>
           <div>
-            LightCurve
+            <strong>LightCurve</strong>
             <p></p>
             In astronomy, a light curve is a graph of light intensity of a
             celestial object or region, as a function of time.
           </div>
         </div>
-        <div class="col-6 sub">
+        <div class="col-4 sub">
 
           <img class="w-75" :src="target_asteroid.picture" />
         </div>
@@ -135,18 +138,17 @@ function initAnimate(asteriod, param, data) {
     }
 
     // console.log(whitePixal, allPixal);
-    if (now < 360 && whitePixal > 0) {
+    if (now < 360 && whitePixal > 1000) {
       // data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
       data.push([now++, caculateMagnitude(whitePixal)]);
     }
   }
-
   function addLight() {
     const color = 0xffffff;
     const intensity = 1;
     const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(0, 100, 0);
-    light.target.position.set(0, -100, 0);
+    light.position.set(0, 0, 100);
+    light.target.position.set(0, 0, -100);
     scene.add(light);
     scene.add(light.target);
   }
@@ -157,7 +159,7 @@ function initAnimate(asteriod, param, data) {
     const near = 0.01;
     const far = 1000;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(0, 100, 0);
+    camera.position.set(0, 0, 100);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
   }
 
@@ -168,16 +170,38 @@ function initAnimate(asteriod, param, data) {
     if (visible) scene.add(helper);
     var box3 = new THREE.Box3();
     box3.setFromObject(helper); // or from mesh, same answer
-    camera.position.set(0, box3.max.y + 100, 0);
+    // camera.position.set(0, box3.max.y + 100, 0);
+    camera.position.set(0, 0, box3.max.z + 100);
+  }
+
+  let arrowHelper;
+  function addVecotr(){
+    const dir = new THREE.Vector3( 0, 0, 0 );
+
+    //normalize the direction vector (convert to vector of length 1)
+    dir.normalize();
+
+    const origin = new THREE.Vector3( 0, 0, 0 );
+    const length = 100;
+    const hex = 0xffff00;
+
+    arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
+    scene.add( arrowHelper );
+  }
+
+  function addAxes() {
+    const axesHelper = new THREE.AxesHelper(100);
+    scene.add(axesHelper);
   }
 
   function animation() {
     if (mainOBJ) {
       let axis = new THREE.Vector3(
-        Math.cos(phi) * Math.sin(theta),
-        Math.sin(phi) * Math.sin(theta),
-        Math.cos(theta)
+        Math.cos(phi * Math.PI / 180) * Math.sin(theta * Math.PI / 180),
+        Math.sin(phi * Math.PI / 180) * Math.sin(theta * Math.PI / 180),
+        Math.cos(theta * Math.PI / 180)
       );
+      arrowHelper.setDirection(axis.normalize());
       mainOBJ.rotateOnAxis(axis, Math.PI / 180);
     }
   }
@@ -223,6 +247,8 @@ function initAnimate(asteriod, param, data) {
 
   addCamera();
   addLight();
+  addAxes();
+  addVecotr();
 
   const objLoader = new OBJLoader();
   objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
@@ -273,7 +299,7 @@ function initModel(asteriod, param) {
     const near = 0.01;
     const far = 1000;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(0, 100, 0);
+    camera.position.set(0, 0, 100);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
   }
 
@@ -294,7 +320,7 @@ function initModel(asteriod, param) {
     if (visible) scene.add(helper);
     var box3 = new THREE.Box3();
     box3.setFromObject(helper); // or from mesh, same answer
-    camera.position.set(0, box3.max.y + 100, 0);
+    camera.position.set(0, 0, box3.max.z + 100);
   }
 
   function caculateScale(obj) {
@@ -354,7 +380,9 @@ export default {
   data() {
     return {
       param: {},
+      flag: false,
       asteriod: {},
+      animation: false,
       lightcurve_option: {
         title: {
           text: "Light curve",
@@ -400,6 +428,7 @@ export default {
             symbolSize: 8,
             data: [],
             type: "scatter",
+            large: true,
           },
         ],
       },
@@ -429,7 +458,13 @@ export default {
     this.time = setInterval(this.change, 100);
 
     //Compute
+    let vm = this;
     initAnimate(this.asteriod, this.param, this.lightcurve_option.series[0].data);
+    setTimeout(function(){
+        vm.flag = true;
+        // console.log("10 seconds");
+    },10000);
+    // initAnimate(this.asteriod, this.param, this.lightcurve_option.series[0].data);
     initModel(this.asteriod, this.param);
   },
   computed: {
