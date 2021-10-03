@@ -4,31 +4,31 @@
         <img src="https://i.imgur.com/6Wu7PIU.jpg" alt="">
         <div class="row">
             <div class="card img">
-                <img src="https://i.imgur.com/40nkHJR.jpg" alt="">
+                <img src="https://i.imgur.com/ptNNSas.jpg" alt="">
                 <div class="card-body">
                     <button class="btn btn-primary" @click="choose(1)">Choose</button>
                 </div>
             </div>
             <div class="card img">
-                <img src="https://i.imgur.com/gKtwJgB.jpg" alt="">
+                <img src="https://i.imgur.com/y2Zbhxu.jpg" alt="">
                 <div class="card-body">
                     <button class="btn btn-primary" @click="choose(2)">Choose</button>
                 </div>
             </div>
             <div class="card img">
-                <img src="https://i.imgur.com/GWZkkdZ.jpg" alt="">
+                <img src="https://i.imgur.com/05Um45d.jpg" alt="">
                 <div class="card-body">
                     <button class="btn btn-primary" @click="choose(3)">Choose</button>
                 </div>
             </div>
             <div class="card img">
-                <img src="https://i.imgur.com/5TIhDuX.jpg" alt="">
+                <img src="https://i.imgur.com/MS7CRrB.jpg" alt="">
                 <div class="card-body">
                     <button class="btn btn-primary" @click="choose(4)">Choose</button>
                 </div>
             </div>
             <div class="card img">
-                <img src="https://i.imgur.com/3UM7HYn.jpg" alt="">
+                <img src="https://i.imgur.com/IvURWoi.jpg" alt="">
                 <div class="card-body">
                     <button class="btn btn-primary" @click="choose(5)">Choose</button>
                 </div>
