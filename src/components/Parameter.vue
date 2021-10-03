@@ -53,23 +53,27 @@
                     </div>
                   </div>
                   <div class="accordion-item">
-                    <h3 class="accordion-header" id="headingFive">
+                    <h3 class="accordion-header" id="headingTwo">
                       <div class="ps-3">
-                        <button class="float-end btn button-light d-inline no-focus-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        <button class="float-end btn button-light d-inline no-focus-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                           <i class="bi bi-chevron-down"></i>
                         </button>
-                        <div class="h4 d-inline" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        Period
+                        <div class="h4 d-inline" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Category
                         </div>
-                          <div class="d-inline">
-                            <input v-model="param.rotate_period" id="" type="range" value="1" min="1" max="10" step="0.5" :disabled="false">
-                            <span class="range-value"><span class="range-val" contenteditable="false">
-                              {{param.rotate_period}}
-                            </span><span class="unit">hour</span></span>
+                          <div class="d-inline dropdown">
+                            <button class="btn btn-light dropdown-toggle btn-lg" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              {{param.category}}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                              <li v-for="(cat, index) in categories" :key=index>
+                                <button class="dropdown-item btn btn-light btn-lg" @click="changeCat(cat)">{{cat}}</button>
+                              </li>
+                            </ul>
                           </div>
                         </div>
                     </h3>
-                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
                         <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                       </div>
@@ -86,10 +90,10 @@
                         Perihelion Distance
                         </div>
                         <div class="d-inline">
-                          <input v-model="param.avg_semi_major_axis" id="" type="range" value="1" min="1" max="5" step="1" :disabled="false">
+                          <input v-model="param.perihelion_distance" id="" type="range" value="1" min="0.5" max="6" step="0.1" :disabled="false">
                           <span class="range-value"><span class="range-val" contenteditable="false">
-                            {{param.avg_semi_major_axis}}
-                          </span><span class="unit">km</span></span>
+                            {{param.perihelion_distance}}
+                          </span><span class="unit">AU</span></span>
                         </div>
                         </div>
                     </h3>
@@ -107,12 +111,12 @@
                           <i class="bi bi-chevron-down"></i>
                         </button>
                         <div class="h4 d-inline" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        Size
+                        Diameter
                         </div>
                           <div class="d-inline">
-                            <input v-model="param.radius" id="" type="range" value="1" min="1" max="360" step="0.01" :disabled="false">
+                            <input v-model="param.diameter" id="" type="range" value="1" min="0.1" max="100" step="0.1" :disabled="false">
                             <span class="range-value"><span class="range-val" contenteditable="false">
-                              {{param.radius}}
+                              {{param.diameter}}
                             </span><span class="unit">km</span></span>
                           </div>
                         </div>
@@ -123,6 +127,50 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingFive">
+                      <div class="ps-3">
+                        <button class="float-end btn button-light d-inline no-focus-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                          <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="h4 d-inline" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Albedo
+                        </div>
+                          <div class="d-inline">
+                            <input v-model="param.albedo" id="" type="range" value="1" min="0" max="1" step="0.01" :disabled="false">
+                            <span class="range-value"><span class="range-val" contenteditable="false">
+                              {{param.albedo}}
+                            </span><span class="unit"><!-- Unit --></span></span>
+
+                          </div>
+                        </div>
+                    </h3>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <strong>This is the four item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingSix">
+                      <div class="ps-3">
+                        <button class="float-end btn button-light d-inline no-focus-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                          <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div class="h4 d-inline" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        Phase angle δ= {{param.phase_angle}} °
+                        </div>
+                        </div>
+                    </h3>
+                    <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <strong>This is the four item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                      </div>
+                    </div>
+                  </div>
+
 
                 </div>
 
@@ -150,13 +198,19 @@ export default {
   data () {
     return {
       step_instruction: "Specify Parameter",
+      categories: ['Main belt', 'Trojans asteroids', 'Hildas asteroids', 'Near-Earth Apollos class', 'Near-Earth Amors class', 'Near-Earth Aten asteroids'],
       param: {
         rotateT: 0,
         rotateF: 0,
-        rotate_period: 1,
-        avg_semi_major_axis: 0,
-        radius: 1,
-        absolute_magnitude: 0,
+        category: "",
+        perihelion_distance: 0.5,
+        diameter: 0.1,
+        albedo: 0,
+        phase_angle: 0,
+        // rotate_period: 1,
+        // avg_semi_major_axis: 0,
+        // radius: 1,
+        // absolute_magnitude: 0,
       },
     }
   },
@@ -179,11 +233,17 @@ export default {
     }
   },
   mounted () {
+    if(this.param.category == ""){
+      this.param.category = this.categories[0]
+    }
     try{
       this.param = JSON.parse(localStorage.param)
     }catch(e){}
   },
   methods: {
+    changeCat(cat){
+      this.param.category = cat
+    },
     pass(e){
       // e.stopPropagation()
     }

@@ -74,7 +74,6 @@ export default {
       this.select_index = 0
       localStorage.asteroid = JSON.stringify(this.asteroids[this.select_index])
     }
-
   },
   methods: {
     select(index){
