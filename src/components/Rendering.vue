@@ -200,15 +200,64 @@ function initAnimate(asteriod, param, data) {
     scene.add(axesHelper);
   }
 
+  function rot(V, theta) {
+    V = V.normalize().toArray();
+    const matrix = new THREE.Matrix3();
+    matrix.set(
+      Math.pow(V[0], 2) + Math.pow(1 - V[0], 2) * Math.cos(theta),
+      V[0] * V[1] * (1 - Math.cos(theta)) - V[2] * Math.sin(theta),
+      V[0] * V[2] * (1 - Math.cos(theta)) + V[1] * Math.sin(theta),
+      V[0] * V[1] * (1 - Math.cos(theta)) + V[2] * Math.sin(theta),
+      Math.pow(V[1], 2) + Math.pow(1 - V[1], 2) * Math.cos(theta),
+      V[1] * V[2] * (1 - Math.cos(theta)) - V[0] * Math.sin(theta),
+      V[0] * V[2] * (1 - Math.cos(theta)) - V[1] * Math.sin(theta),
+      V[1] * V[2] * (1 - Math.cos(theta)) + V[0] * Math.sin(theta),
+      Math.pow(V[2], 2) + Math.pow(1 - V[2], 2) * Math.cos(theta)
+    );
+    return matrix;
+  }
+
+  function R(dt, period, L1, L3, type, axisZ, vector) {
+    // select type
+    // case 1: ## 圓柱
+    // let omaga =
+    //   (6 * Math.pow(L1, 2)) / (3 * Math.pow(L3, 2) + 4 * Math.pow(L3, 2)) -
+    //   (1 * vector.dot(axisZ) * 2 * Math.PI) / period;
+    // omaga = (6*L1^2 / (3*L1^2 + 4*L3^2) - 1) * dot(vector, axisZ)*2*pi/period
+    // case 2: ## 橢球
+    let omaga =
+      ((2 / (1 + Math.pow(L3 / L1, 2)) - 1) * vector.dot(axisZ) * 2 * Math.PI) /
+      period;
+    // omaga = (2/(1+(L3/L1)^2) - 1)* dot(vector, axisZ)*2*pi/period
+    return rot(axisZ, dt * omaga);
+  }
+
+  let fisrtANIMATE = true;
+  let pre_axis_vector = null;
+  let longestaxis = null;
+  let L1 = 3;
+  let L3 = 5;
   function animation() {
     if (mainOBJ) {
-      let axis = new THREE.Vector3(
-        Math.sin((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180),
-        Math.cos((theta * Math.PI) / 180),
-        Math.cos((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180)
-      );
-      arrowHelper.setDirection(axis.normalize());
-      mainOBJ.rotateOnAxis(axis, Math.PI / 180);
+      let vector = null;
+      if (fisrtANIMATE) {        
+        let axis = new THREE.Vector3(
+          Math.sin((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180),
+          Math.cos((theta * Math.PI) / 180),
+          Math.cos((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180)
+        );
+        vector = axis.applyMatrix3(
+          R(1, period, L1, L3, "type", longestaxis, axis)
+        );
+      } else {
+        vector = pre_axis_vector.applyMatrix3(
+          R(1, period, L1, L3, "type", longestaxis, pre_axis_vector)
+        );
+      }
+      arrowHelper.setDirection(vector.normalize());
+      mainOBJ.rotateOnAxis(vector, Math.PI / 180);
+      fisrtANIMATE = false;
+      pre_axis_vector = vector;
     }
   }
 
@@ -218,6 +267,13 @@ function initAnimate(asteriod, param, data) {
     const y = box.max.y - box.min.y;
     const z = box.max.z - box.min.z;
     const longest = Math.max(x, y, z);
+    if (longest === x) {
+      longestaxis = new THREE.Vector3(1, 0, 0);
+    } else if (longest === y) {
+      longestaxis = new THREE.Vector3(0, 1, 0);
+    } else if (longest === z) {
+      longestaxis = new THREE.Vector3(0, 0, 1);
+    }
     return MAXSIZE / longest;
   }
 
