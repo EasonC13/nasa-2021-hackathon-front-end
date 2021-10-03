@@ -24,8 +24,8 @@
             <img class="w-75" :src="asteroids_image_url"> -->
             <canvas id="model"></canvas>
           </div>
-          <div v-if="!flag">
-            計算中
+          <div v-if="!flag" class="align-middle">
+            Light Cruve is Calculating, Plase wait...
           </div>
           <div
             @mouseover="mouseover"
