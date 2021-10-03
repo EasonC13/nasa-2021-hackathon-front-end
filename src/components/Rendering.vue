@@ -57,18 +57,20 @@
             celestial object or region, as a function of time.
             <p></p>
             <p>
-            <strong>x Axis</strong><br/>
-            We use A number (from zero to one) representing the angle in a periodic pattern. X Axis is time in period unit. 
+              <strong>x Axis</strong><br />
+              We use A number (from zero to one) representing the angle in a
+              periodic pattern. X Axis is time in period unit.
             </p>
             <p>
-            <strong>y Axis</strong><br/>
-            Apparent magnitude ($m$) is a measure of the brightness of a star or other astronomical object observed from Earth.
+              <strong>y Axis</strong><br />
+              Apparent magnitude ($m$) is a measure of the brightness of a star
+              or other astronomical object observed from Earth.
             </p>
           </div>
         </div>
         <div class="col-4 sub">
           <img class="w-75" :src="target_asteroid.picture" />
-          <img class="w-75" :src= "target_asteroid['ALCDEF DATA']" alt="">
+          <img class="w-75" :src="target_asteroid['ALCDEF DATA']" alt="" />
         </div>
       </div>
     </div>
@@ -82,6 +84,14 @@ import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 function initAnimate(asteriod, param, data) {
+  asteriod["Rotation period(hr)"] = asteriod["Rotation period(hr)"]
+    ? asteriod["Rotation period(hr)"]
+    : 1;
+  param.perihelion_distance = param.perihelion_distance
+    ? param.perihelion_distance
+    : 2;
+  param.albedo = param.albedo ? param.albedo : 1;
+
   const MAXSIZE = 50;
   let scene;
   let camera;
@@ -91,16 +101,12 @@ function initAnimate(asteriod, param, data) {
   let theta = param.theta;
   let phi = param.phi;
   let dt = 1 / 180;
-  let period = asteriod['Rotation period(hr)'];
+  let period = asteriod["Rotation period(hr)"];
   let L1 = 3;
   let L3 = 5;
   let now = 0;
   let scale = null;
   let AU = 149597870.7;
-  param.perihelion_distance = param.perihelion_distance
-    ? param.perihelion_distance
-    : 2;
-  param.albedo = param.albedo ? param.albedo : 1;
   let perihelion = param.perihelion_distance * AU; // need to add
   let albedo = param.albedo; // need to add
 
@@ -249,7 +255,7 @@ function initAnimate(asteriod, param, data) {
   function animation() {
     if (mainOBJ) {
       let vector = null;
-      if (fisrtANIMATE) {        
+      if (fisrtANIMATE) {
         let axis = new THREE.Vector3(
           Math.sin((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180),
           Math.cos((theta * Math.PI) / 180),
@@ -323,7 +329,7 @@ function initAnimate(asteriod, param, data) {
 
   const objLoader = new OBJLoader();
   if (asteriod.type == "upload") {
-    var obj = objLoader.parse(asteriod.file_text);
+    let obj = objLoader.parse(asteriod.file_text);
     mainOBJ = obj;
     obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
     scene.add(obj);
@@ -336,8 +342,6 @@ function initAnimate(asteriod, param, data) {
       addHelper(obj, false);
     });
   }
-
-  countPixel();
   requestAnimationFrame(render);
 }
 
@@ -511,14 +515,14 @@ export default {
           nameLocation: "middle",
           inverse: true,
           min: function (value) {
-                return value.min.toFixed(2) ;
-              },
+            return value.min.toFixed(2);
+          },
           max: function (value) {
-                return value.max.toFixed(2) ;
-              },
+            return value.max.toFixed(2);
+          },
           axisLabel: {
-            inside: true
-          }
+            inside: true,
+          },
         },
         series: [
           {
