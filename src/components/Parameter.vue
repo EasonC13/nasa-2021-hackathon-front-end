@@ -26,10 +26,10 @@
                         Rotate θ
                         </div>
                         <div class="d-inline">
-                          <input v-model="param.rotateT"
+                          <input v-model="param.theta"
                            id="" type="range" value="1" min="0" max="180" step="1" :disabled="false">
                           <span class="range-value"><span class="range-val" contenteditable="false">
-                            {{param.rotateT}}
+                            {{param.theta}}
                           </span><span class="unit">°</span></span>
                         </div>
                         <br>
@@ -37,10 +37,10 @@
                           <span class="">Rotate</span> ϕ
                         </div>
                         <div class="d-inline">
-                          <input v-model="param.rotateF"
+                          <input v-model="param.phi"
                           id="" type="range" value="1" min="0" max="360" step="1" :disabled="false">
                           <span class="range-value"><span class="range-val" contenteditable="false">
-                            {{param.rotateF}}
+                            {{param.phi}}
                           </span><span class="unit">°</span></span>
                         </div>
                       </div>
@@ -286,17 +286,13 @@ export default {
       step_instruction: "Specify Parameter",
       categories: ['Main belt', 'Trojans asteroids', 'Hildas asteroids', 'Near-Earth Apollos class', 'Near-Earth Amors class', 'Near-Earth Aten asteroids'],
       param: {
-        rotateT: 0,
-        rotateF: 0,
+        theta: 0,
+        phi: 0,
         category: "",
         perihelion_distance: 0.5,
         diameter: 0.1,
         albedo: 0,
         phase_angle: 0,
-        // rotate_period: 1,
-        // avg_semi_major_axis: 0,
-        // radius: 1,
-        // absolute_magnitude: 0,
       },
     }
   },
@@ -319,12 +315,23 @@ export default {
     }
   },
   mounted () {
-    if(this.param.category == ""){
-      this.param.category = this.categories[0]
-    }
     try{
       this.param = JSON.parse(localStorage.param)
     }catch(e){}
+    let target_asteroid = this.target_asteroid
+    if(this.param.key != target_asteroid["3D model link"]){
+      this.param.key = target_asteroid["3D model link"]
+      this.param.theta = target_asteroid.theta
+      this.param.phi = target_asteroid.phi
+      this.param.category = target_asteroid["Asteroid category"]
+      this.param.perihelion_distance = target_asteroid["perihelion distance (AU)"]
+      this.param.diameter = target_asteroid["long (km)"]
+      this.param.albedo = target_asteroid["albedo"]
+      this.param.phase_angle = 0
+    }
+    if(this.param.category == ""){
+      this.param.category = this.categories[0]
+    }
   },
   methods: {
     changeCat(cat){
