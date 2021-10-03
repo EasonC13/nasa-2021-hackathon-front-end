@@ -37,20 +37,20 @@
     </div>
     <div class="">
       <div class="row">
-        <div class="col-6 sub">
+        <div class="col-8 sub">
           <p class='h2'>About</p>
 
           <p>
             {{ target_asteroid.Description }}
           </p>
           <div>
-            LightCurve
+            <strong>LightCurve</strong>
             <p></p>
             In astronomy, a light curve is a graph of light intensity of a
             celestial object or region, as a function of time.
           </div>
         </div>
-        <div class="col-6 sub">
+        <div class="col-4 sub">
 
           <img class="w-75" :src="target_asteroid.picture" />
         </div>
@@ -355,6 +355,7 @@ export default {
     return {
       param: {},
       asteriod: {},
+      animation: false,
       lightcurve_option: {
         title: {
           text: "Light curve",
