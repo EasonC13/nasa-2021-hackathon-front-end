@@ -12,14 +12,14 @@
           <router-link class="nav-link text-decoration-none" :class="{
             'link-dark': currentRouteName!='About',
             'link-primary': currentRouteName=='About'}"
-           aria-current="page" to="About">About</router-link>
+           aria-current="page" to="About">0.introduction</router-link>
         </li>
         <li class="nav-item btn" :class="{
           'btn-light': currentRouteName=='Selector'}">
           <router-link class="nav-link text-decoration-none" :class="{
             'link-dark': currentRouteName!='Selector',
             'link-primary': currentRouteName=='Selector'}"
-           aria-current="page" to="Selector">Select Asteroid</router-link>
+           aria-current="page" to="Selector">1.Select Asteroid</router-link>
         </li>
         <li class="nav-item btn" :class="{
           'btn-light': currentRouteName=='Parameter',
@@ -27,14 +27,14 @@
           <router-link class="nav-link text-decoration-none" :class="{
             'link-dark': currentRouteName!='Parameter',
             'link-primary': currentRouteName=='Parameter'}"
-           aria-current="page" to="Parameter">Specify Parameter</router-link>
+           aria-current="page" to="Parameter">2.Specify Parameter</router-link>
         </li>
         <li class="nav-item btn" :class="{
           'btn-light': currentRouteName=='Renderer'}">
           <router-link class="nav-link text-decoration-none" :class="{
             'link-dark': currentRouteName!='Renderer',
             'link-primary': currentRouteName=='Renderer'}"
-           aria-current="page" to="Renderer">Renderer</router-link>
+           aria-current="page" to="Renderer">3.Renderer</router-link>
         </li>
         <li class="nav-item dropdown btn">
           <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

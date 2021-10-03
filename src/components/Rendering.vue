@@ -1,13 +1,17 @@
 <template>
   <div class="container">
     <div class="clearfix">
-        <h2 class="">
-            Renderer
-            <div class="float-end align-">
-              <router-link class="btn btn-light me-2" to="Parameter">Back</router-link>
-              <router-link class="btn btn-primary me-2" to="Selector">Select New</router-link>
-            </div>
-        </h2>
+      <h2 class="">
+        Renderer
+        <div class="float-end align-">
+          <router-link class="btn btn-light me-2" to="Parameter"
+            >Back</router-link
+          >
+          <router-link class="btn btn-primary me-2" to="Selector"
+            >Select New</router-link
+          >
+        </div>
+      </h2>
     </div>
     <div class="row">
       <div class="col-8 main">
@@ -33,7 +37,7 @@
             class="col-12 col-sm-12 sub"
             v-if="flag"
           >
-            <v-chart :option="lightcurve_option"/>
+            <v-chart :option="lightcurve_option" />
           </div>
         </div>
       </div>
@@ -41,7 +45,7 @@
     <div class="">
       <div class="row">
         <div class="col-8 sub">
-          <p class='h2'>About</p>
+          <p class="h2">About</p>
 
           <p>
             {{ target_asteroid.Description }}
@@ -54,7 +58,6 @@
           </div>
         </div>
         <div class="col-4 sub">
-
           <img class="w-75" :src="target_asteroid.picture" />
         </div>
       </div>
@@ -83,33 +86,34 @@ function initAnimate(asteriod, param, data) {
   let now = 0;
   let scale = null;
   let AU = 149597870.7;
-  param.perihelion_distance = param.perihelion_distance ? param.perihelion_distance : 2;
+  param.perihelion_distance = param.perihelion_distance
+    ? param.perihelion_distance
+    : 2;
   param.albedo = param.albedo ? param.albedo : 1;
   let perihelion = param.perihelion_distance * AU; // need to add
   let albedo = param.albedo; // need to add
 
-  function caculateMagnitude(pixels) { 
-    let Dbs = Math.abs(perihelion - AU); 
- 
-    let normalize_factor = scale; 
- 
-    let AREA = 
-      Math.pow(50, 2) / 230400*8 * pixels * Math.pow(normalize_factor, -2); 
-    let d = Math.pow(AREA / Math.PI, 0.5); 
-    let H = -26.74 - 5 * Math.log10((Math.pow(albedo, 0.5) * d) / 2 / AU); 
-    let m = H + 5 * Math.log10((perihelion * Dbs) / Math.pow(AU, 2)); 
-    m.toFixed(2); 
-    console.log(m); 
-    return m; 
+  function caculateMagnitude(pixels) {
+    let Dbs = Math.abs(perihelion - AU);
+
+    let normalize_factor = scale;
+
+    let AREA =
+      (Math.pow(50, 2) / 230400) * 8 * pixels * Math.pow(normalize_factor, -2);
+    let d = Math.pow(AREA / Math.PI, 0.5);
+    let H = -26.74 - 5 * Math.log10((Math.pow(albedo, 0.5) * d) / 2 / AU);
+    let m = H + 5 * Math.log10((perihelion * Dbs) / Math.pow(AU, 2));
+    m.toFixed(2);
+    console.log(m);
+    return m;
   }
-  // console.log(caculateMagnitude(230400));
 
   function countPixel() {
     let size = renderer.domElement;
     let width = size.width;
     let height = size.height;
 
-    if (width == 0 || height == 0) return;
+    if (width == 0 && height == 0) return;
 
     let gl = canvas.getContext("webgl2", {
       preserveDrawingBuffer: true,
@@ -177,18 +181,18 @@ function initAnimate(asteriod, param, data) {
   }
 
   let arrowHelper;
-  function addVecotr(){
-    const dir = new THREE.Vector3( 0, 0, 0 );
+  function addVecotr() {
+    const dir = new THREE.Vector3(0, 0, 0);
 
     //normalize the direction vector (convert to vector of length 1)
     dir.normalize();
 
-    const origin = new THREE.Vector3( 0, 0, 0 );
-    const length = 100;
+    const origin = new THREE.Vector3(0, 0, 0);
+    const length = 1000;
     const hex = 0xffff00;
 
-    arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
-    scene.add( arrowHelper );
+    arrowHelper = new THREE.ArrowHelper(dir, origin, length, hex);
+    scene.add(arrowHelper);
   }
 
   function addAxes() {
@@ -199,9 +203,9 @@ function initAnimate(asteriod, param, data) {
   function animation() {
     if (mainOBJ) {
       let axis = new THREE.Vector3(
-        Math.cos(phi * Math.PI / 180) * Math.sin(theta * Math.PI / 180),
-        Math.sin(phi * Math.PI / 180) * Math.sin(theta * Math.PI / 180),
-        Math.cos(theta * Math.PI / 180)
+        Math.sin((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180),
+        Math.cos((theta * Math.PI) / 180),
+        Math.cos((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180)
       );
       arrowHelper.setDirection(axis.normalize());
       mainOBJ.rotateOnAxis(axis, Math.PI / 180);
@@ -253,14 +257,14 @@ function initAnimate(asteriod, param, data) {
   addVecotr();
 
   const objLoader = new OBJLoader();
-  if(asteriod.type == "upload"){
+  if (asteriod.type == "upload") {
     var obj = objLoader.parse(asteriod.file_text);
     mainOBJ = obj;
-    obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+    obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
     scene.add(obj);
     addHelper(obj, false);
-  }else{
-      objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
+  } else {
+    objLoader.load(`/static/objs/${asteriod["3D model filename"]}`, (obj) => {
       mainOBJ = obj;
       obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
       scene.add(obj);
@@ -377,18 +381,18 @@ function initModel(asteriod, param) {
   addAxes();
 
   const objLoader = new OBJLoader();
-  if(asteriod.type == "upload"){
+  if (asteriod.type == "upload") {
     var obj = objLoader.parse(asteriod.file_text);
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
-  }else{
-    objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
+    addHelper(obj, true);
+  } else {
+    objLoader.load(`/static/objs/${asteriod["3D model filename"]}`, (obj) => {
       obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
       scene.add(obj);
       addHelper(obj, true);
-  });
+    });
   }
-
 
   requestAnimationFrame(render);
 }
@@ -439,8 +443,8 @@ export default {
         yAxis: {
           name: "brightness gain",
           inverse: true,
-          min: 'dataMin',
-          max: 'dataMax'
+          min: "dataMin",
+          max: "dataMax",
         },
         series: [
           {
@@ -467,35 +471,38 @@ export default {
   },
   mounted() {
     // load parameter and asteroid
-    this.param = JSON.parse(localStorage.param)
-    this.asteriod = JSON.parse(localStorage.asteroid)
+    this.param = JSON.parse(localStorage.param);
+    this.asteriod = JSON.parse(localStorage.asteroid);
 
-    console.log(this.param)
-    console.log(this.asteriod)
-
+    console.log(this.param);
+    console.log(this.asteriod);
 
     this.time = setInterval(this.change, 100);
 
     //Compute
     let vm = this;
-    initAnimate(this.asteriod, this.param, this.lightcurve_option.series[0].data);
-    setTimeout(function(){
-        vm.flag = true;
-        // console.log("10 seconds");
-    },10000);
+    initAnimate(
+      this.asteriod,
+      this.param,
+      this.lightcurve_option.series[0].data
+    );
+    setTimeout(function () {
+      vm.flag = true;
+      // console.log("10 seconds");
+    }, 10000);
     // initAnimate(this.asteriod, this.param, this.lightcurve_option.series[0].data);
     initModel(this.asteriod, this.param);
   },
   computed: {
-    target_asteroid: function(){
-      try{
-        return JSON.parse(localStorage.asteroid)
-      }catch(e){
-        alert("Please Select your asteroids first!")
-        this.$router.push({ path: 'Selector' })
+    target_asteroid: function () {
+      try {
+        return JSON.parse(localStorage.asteroid);
+      } catch (e) {
+        alert("Please Select your asteroids first!");
+        this.$router.push({ path: "Selector" });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
