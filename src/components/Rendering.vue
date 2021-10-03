@@ -90,8 +90,10 @@ function initAnimate(asteriod, param, data) {
   let mainOBJ;
   let theta = param.theta;
   let phi = param.phi;
-  let dt = 1;
-  let period = 180;
+  let dt = 1 / 180;
+  let period = asteriod['Rotation period(hr)'];
+  let L1 = 3;
+  let L3 = 5;
   let now = 0;
   let scale = null;
   let AU = 149597870.7;
@@ -244,8 +246,6 @@ function initAnimate(asteriod, param, data) {
   let fisrtANIMATE = true;
   let pre_axis_vector = null;
   let longestaxis = null;
-  let L1 = 3;
-  let L3 = 5;
   function animation() {
     if (mainOBJ) {
       let vector = null;
@@ -256,11 +256,11 @@ function initAnimate(asteriod, param, data) {
           Math.cos((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180)
         );
         vector = axis.applyMatrix3(
-          R(1, period, L1, L3, "type", longestaxis, axis)
+          R(dt, period, L1, L3, "type", longestaxis, axis)
         );
       } else {
         vector = pre_axis_vector.applyMatrix3(
-          R(1, period, L1, L3, "type", longestaxis, pre_axis_vector)
+          R(dt, period, L1, L3, "type", longestaxis, pre_axis_vector)
         );
       }
       arrowHelper.setDirection(vector.normalize());
