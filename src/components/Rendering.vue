@@ -73,8 +73,8 @@ function initAnimate(asteriod, param, data) {
   let canvas;
   let renderer;
   let mainOBJ;
-  let theta = param.rotateT;
-  let phi = param.rotateF;
+  let theta = param.theta;
+  let phi = param.phi;
   let dt = 1;
   let period = 180;
   let now = 0;
