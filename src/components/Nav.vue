@@ -43,6 +43,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <!-- <li><router-link class="dropdown-item" to="Upload">Upload</router-link></li> -->
             <li><router-link class="dropdown-item" to="question">Challenge Game</router-link></li>
+            <li><router-link class="dropdown-item disabled" to="About">Contact Us</router-link></li>
             <!-- <li><router-link class="dropdown-item" to="More-Model">More Model</router-link></li> -->
             <!-- <li><hr class="dropdown-divider"></li> -->
           </ul>
@@ -50,7 +51,6 @@
       </ul>
 
       <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Contact Us</button>
         <!-- <button type="button" class="btn btn-outline-primary me-2">Login</button>
         <button type="button" class="btn btn-primary">Sign-up</button> -->
       </div>
