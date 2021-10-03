@@ -31,7 +31,6 @@
           >
             <v-chart :option="lightcurve_option" />
           </div>
-          <!-- <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option"/> -->
         </div>
       </div>
     </div>
@@ -140,7 +139,6 @@ function initAnimate(asteriod, param, data) {
       data.push([now++, caculateMagnitude(whitePixal)]);
     }
   }
-
   function addLight() {
     const color = 0xffffff;
     const intensity = 1;
@@ -401,6 +399,7 @@ export default {
             symbolSize: 8,
             data: [],
             type: "scatter",
+            large: true,
           },
         ],
       },
