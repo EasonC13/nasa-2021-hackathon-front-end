@@ -24,9 +24,10 @@
                   <div class="card-body">
                     <h5 class="card-title">{{asteroid.Name}}</h5>
                     <p>Category: {{asteroid["Asteroid category"]}}</p>
-                    <p class="card-text">{{asteroid.Description.substring(0, 150) + " "}}<a :href="asteroid.read_more" class="text-secondary">...more</a></p>
-                    <div class="text-end">
-                      <a :href="asteroid.Wiki_Link" class="float-right">Know more</a>
+                    <p class="card-text">{{asteroid.Description.substring(0, 150) + " "}}
+                      <a :href="asteroid.Wiki_Link" target="_blank" class="text-secondary" v-if="asteroid.Wiki_Link">...more</a></p>
+                    <div class="text-end" v-if="asteroid.Wiki_Link">
+                      <a :href="asteroid.Wiki_Link" target="_blank" class="float-right">Know more</a>
                     </div>
                   </div>
                 </div>

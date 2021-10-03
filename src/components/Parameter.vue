@@ -209,14 +209,14 @@
             </div>
             <div class="col-sm-12 col-md-6">
               <p class="h5">The astroid you select is
-                <a :href="target_asteroid.Wiki_Link">{{target_asteroid.Name}}</a>
+                <a :href="target_asteroid.Wiki_Link" target="_blank">{{target_asteroid.Name}}</a>
               </p>
               <img class="w-100" :src="target_asteroid.picture" alt="Card image cap">
               <div class="clearfix">
                 <p class="lead float-end">
                   {{ target_asteroid.description}}
-                  <a class='btn btn-light' :href="target_asteroid.Wiki_Link">read more</a>
-                  <a class='btn btn-light' :href="target_asteroid['3D model link']">Download Model</a>
+                  <a class='btn btn-light' :href="target_asteroid.Wiki_Link" target="_blank">Know more about {{target_asteroid.Name}}</a>
+                  <a class='btn btn-light' :href="target_asteroid['3D model link']" target="_blank">Download {{target_asteroid["3D model filename"]}}</a>
                 </p>
               </div>
 
