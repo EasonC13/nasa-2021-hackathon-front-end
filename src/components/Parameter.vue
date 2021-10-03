@@ -632,8 +632,8 @@
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                           >
-                            <!-- {{ param.rotation_model }} -->
-                            1
+                            {{ param.rotation_model+" " }}
+
                           </button>
                           <ul
                             class="dropdown-menu"
@@ -1001,9 +1001,9 @@ export default {
         "Main belt",
         "Trojans asteroids",
         "Hildas asteroids",
-        "Near-Earth Apollos class",
-        "Near-Earth Amors class",
-        "Near-Earth Aten asteroids",
+        "Apollos class",
+        "Amor class",
+        "Aten asteroids",
       ],
       param: {
         theta: 0,
