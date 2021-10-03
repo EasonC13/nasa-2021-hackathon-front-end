@@ -102,8 +102,9 @@ function initAnimate(asteriod, param, data) {
   let phi = param.phi;
   let dt = 1 / 180;
   let period = asteriod["Rotation period(hr)"];
-  let L1 = 3;
-  let L3 = 5;
+  let L1 = param.wide;
+  let L3 = param.diameter;
+  let animateModel = param.rotation_model;
   let now = 0;
   let scale = null;
   let AU = 149597870.7;
@@ -254,25 +255,35 @@ function initAnimate(asteriod, param, data) {
   let longestaxis = null;
   function animation() {
     if (mainOBJ) {
-      let vector = null;
-      if (fisrtANIMATE) {
+      if(animateModel == 1){
         let axis = new THREE.Vector3(
-          Math.sin((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180),
-          Math.cos((theta * Math.PI) / 180),
-          Math.cos((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180)
-        );
-        vector = axis.applyMatrix3(
-          R(dt, period, L1, L3, "type", longestaxis, axis)
-        );
-      } else {
-        vector = pre_axis_vector.applyMatrix3(
-          R(dt, period, L1, L3, "type", longestaxis, pre_axis_vector)
-        );
+            Math.sin((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180),
+            Math.cos((theta * Math.PI) / 180),
+            Math.cos((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180)
+          );
+        arrowHelper.setDirection(axis.normalize());
+        mainOBJ.rotateOnAxis(axis, Math.PI / 180);
+      } else if(animateModel == 2){
+        let vector = null;
+        if (fisrtANIMATE) {
+          let axis = new THREE.Vector3(
+            Math.sin((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180),
+            Math.cos((theta * Math.PI) / 180),
+            Math.cos((phi * Math.PI) / 180) * Math.sin((theta * Math.PI) / 180)
+          );
+          vector = axis.applyMatrix3(
+            R(dt, period, L1, L3, "type", longestaxis, axis)
+          );
+        } else {
+          vector = pre_axis_vector.applyMatrix3(
+            R(dt, period, L1, L3, "type", longestaxis, pre_axis_vector)
+          );
+        }
+        arrowHelper.setDirection(vector.normalize());
+        mainOBJ.rotateOnAxis(vector, Math.PI / 180);
+        fisrtANIMATE = false;
+        pre_axis_vector = vector;
       }
-      arrowHelper.setDirection(vector.normalize());
-      mainOBJ.rotateOnAxis(vector, Math.PI / 180);
-      fisrtANIMATE = false;
-      pre_axis_vector = vector;
     }
   }
 
