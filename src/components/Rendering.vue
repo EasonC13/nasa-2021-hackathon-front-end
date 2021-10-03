@@ -342,6 +342,7 @@ export default {
   components: {},
   data() {
     return {
+      param: {},
       description: localStorage["description"],
       asteroids_image_url: localStorage["url"],
       lightcurve_option: {
@@ -406,6 +407,11 @@ export default {
     },
   },
   mounted() {
+    // load parameter and asteroid
+    this.param = JSON.parse(localStorage.param)
+    this.asteriod = JSON.parse(localStorage.asteroid)
+
+
     this.time = setInterval(this.change, 100);
 
     //Compute
