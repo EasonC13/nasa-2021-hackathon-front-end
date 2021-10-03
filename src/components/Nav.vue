@@ -1,9 +1,9 @@
 <template>
 <div>
   <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-        <img src="https://cdn-icons-png.flaticon.com/512/993/993845.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-        <span> Light Curve Demo</span>
+      <a href="/" class="h1 d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <img src="https://cdn-icons-png.flaticon.com/512/993/993845.png" alt="" width="60" height="48" class="d-inline-block align-text-top">
+        <span class="ps-3"> Light Curve Demo</span>
       </a>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -41,11 +41,10 @@
             Others
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><router-link class="dropdown-item" to="Upload">upload</router-link></li>
-            <li><router-link class="dropdown-item" to="question">question</router-link></li>
-            <li><router-link class="dropdown-item" to="scene_test">scene_test</router-link></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item disabled" href="#">待補充</a></li>
+            <li><router-link class="dropdown-item" to="Upload">Upload</router-link></li>
+            <li><router-link class="dropdown-item" to="question">Question</router-link></li>
+            <!-- <li><router-link class="dropdown-item" to="More-Model">More Model</router-link></li> -->
+            <!-- <li><hr class="dropdown-divider"></li> -->
           </ul>
         </li>
       </ul>

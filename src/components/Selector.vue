@@ -2,10 +2,15 @@
   <div class="container">
     <div>
       <div class="clearfix">
+        <MoreModel></MoreModel>
         <h2 class="">
             {{step_instruction}}
             <div class="float-end">
-              <button class="btn btn-danger me-2" @click="clear_upload">Clear Cache</button>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#moreModal">
+                Where to find more asteroid model?
+              </button>
+              <button class="btn btn-danger me-2" @click="clear_upload" v-if="have_custom">Clear Cache</button>
               <router-link class="btn btn-light me-2" to="About">About This Project</router-link>
               <router-link class="btn btn-primary me-2" to="Parameter">Next</router-link>
             </div>
@@ -47,11 +52,12 @@
 </template>
 <script>
 import Upload from "./Upload.vue"
-
+import MoreModel from "./MoreModel.vue"
 export default {
   name: "Selector",
   components: {
-    Upload: Upload
+    Upload: Upload,
+    MoreModel,
   },
   data () {
     return {
@@ -72,6 +78,9 @@ export default {
         custom = custom.reverse()
       }
       return custom.concat(this.base_asteroids)
+    },
+    have_custom: function(){
+      return localStorage.custom_objs != undefined
     }
   },
   mounted () {
