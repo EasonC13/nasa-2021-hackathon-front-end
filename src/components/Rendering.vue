@@ -93,6 +93,7 @@ function initAnimate(asteriod, param, data) {
     let d = Math.pow(AREA / 4 / Math.PI, 0.5);
     let H = -26.74 - 5 * Math.log10((Math.pow(albedo, 0.5) * d) / 2 / AU);
     let m = H + 5 * Math.log10((perihelion * Dbs) / Math.pow(AU, 2));
+    m.toFixed(2);
     console.log(m);
     return m;
   }
@@ -391,8 +392,8 @@ export default {
         yAxis: {
           name: "brightness gain",
           inverse: true,
-          min: -20,
-          max: 20,
+          min: 'dataMin',
+          max: 'dataMax'
         },
         series: [
           {
