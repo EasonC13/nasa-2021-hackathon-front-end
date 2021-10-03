@@ -158,22 +158,39 @@ export default {
     let path = "/static/objs/"
     let filename="Vesta.obj"
     // filename = 'Toutatis_hirestoutatis.obj'
-    if(filename.includes(".obj")){
-      // let objLoader = new THREE.OBJLoader();
-      objLoader.load(path+filename, (obj) => {
-        mainOBJ = obj;
-        obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
-        scene.add(obj);
-      });
-    }else if(filename.includes(".stl")){
-      let stlLoader = new STLLoader()
+    console.log("QQQ")
+    let objLoader = new THREE.OBJLoader();
 
-      stlLoader.load(path+filename, function (geometry) {
-        var material = new THREE.MeshNormalMaterial()
-        var mesh = new THREE.Mesh(geometry, material)
-        scene.add(mesh)
-      })
-    }
+    // fetch(path+filename).then((x)=> x.text().then(x => console.log(x)))
+
+    var obj = objLoader.parse(localStorage.custom_obj);
+    mainOBJ = obj;
+    obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+    scene.add(obj);
+
+    // objLoader.parse(localStorage.custom_obj, (obj) => {
+    //   console.log("CCC", obj)
+    //   mainOBJ = obj;
+    //   obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+    //   scene.add(obj);
+    // });
+
+    // if(filename.includes(".obj")){
+    //   let objLoader = new THREE.OBJLoader();
+    //   objLoader.load(path+filename, (obj) => {
+    //     mainOBJ = obj;
+    //     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+    //     scene.add(obj);
+    //   });
+    // }else if(filename.includes(".stl")){
+    //   let stlLoader = new STLLoader()
+
+    //   stlLoader.load(path+filename, function (geometry) {
+    //     var material = new THREE.MeshNormalMaterial()
+    //     var mesh = new THREE.Mesh(geometry, material)
+    //     scene.add(mesh)
+    //   })
+    // }
 
     countPixel();
     requestAnimationFrame(render);

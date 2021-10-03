@@ -38,11 +38,12 @@
         </li>
         <li class="nav-item dropdown btn">
           <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            其他功能
+            Others
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><router-link class="dropdown-item" to="scene_test">scene_test</router-link></li>
+            <li><router-link class="dropdown-item" to="Upload">upload</router-link></li>
             <li><router-link class="dropdown-item" to="question">question</router-link></li>
+            <li><router-link class="dropdown-item" to="scene_test">scene_test</router-link></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item disabled" href="#">待補充</a></li>
           </ul>
