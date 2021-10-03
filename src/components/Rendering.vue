@@ -38,7 +38,8 @@
     <div class="">
       <div class="row">
         <div class="col-6 sub">
-          關於此行星
+          <p class='h2'>About</p>
+
           <p>
             {{ target_asteroid.description }}
           </p>
@@ -50,7 +51,7 @@
           </div>
         </div>
         <div class="col-6 sub">
-          小行星的3D Model 顯示或者是高清圖片
+
           <img class="w-75" :src="target_asteroid.image_url" />
         </div>
       </div>
@@ -223,7 +224,7 @@ function initAnimate(asteriod, param, data) {
   addLight();
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/Vesta.obj", (obj) => {
+  objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
     mainOBJ = obj;
     obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
     scene.add(obj);
@@ -338,7 +339,7 @@ function initModel(asteriod, param) {
   addAxes();
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/Vesta.obj", (obj) => {
+  objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
     addHelper(obj, true);
