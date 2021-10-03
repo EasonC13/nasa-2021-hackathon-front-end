@@ -419,7 +419,8 @@ export default {
         },
         height: 250,
         xAxis: {
-          name: "Rational phase",
+          name: "phase θ(deg)",
+          nameLocation: "middle",
           title: "12",
           axisPointer: {
             value: 0,
@@ -441,10 +442,18 @@ export default {
           max: 360,
         },
         yAxis: {
-          name: "brightness gain",
+          name: "apparent magnitude (m)",
+          nameLocation: "middle",
           inverse: true,
-          min: "dataMin",
-          max: "dataMax",
+          min: function (value) {
+                return value.min.toFixed(2) ;
+              },
+          max: function (value) {
+                return value.max.toFixed(2) ;
+              },
+          axisLabel: {
+            inside: true
+          }
         },
         series: [
           {
