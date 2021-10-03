@@ -224,7 +224,7 @@ function initAnimate(asteriod, param, data) {
   addLight();
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/Vesta.obj", (obj) => {
+  objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
     mainOBJ = obj;
     obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
     scene.add(obj);
@@ -339,7 +339,7 @@ function initModel(asteriod, param) {
   addAxes();
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/Vesta.obj", (obj) => {
+  objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
     addHelper(obj, true);
