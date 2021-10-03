@@ -135,8 +135,8 @@ function initAnimate(asteriod, param, data) {
 
     // console.log(whitePixal, allPixal);
     if (now < 360 && whitePixal > 0) {
-      data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
-      // data.push([now++, caculateMagnitude(whitePixal)]);
+      // data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
+      data.push([now++, caculateMagnitude(whitePixal)]);
     }
   }
 
