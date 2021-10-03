@@ -425,7 +425,7 @@
                       data-bs-parent="#accordionExample"
                     >
                       <div class="accordion-body">
-                        wide_intro
+                        In order to simulate the Symmetric top precession model, we use 'wide' as 2*semiaxis of  the symmetry side (a, b). This parameter is disabled when you use model 1.
                       </div>
                     </div>
                   </div>
