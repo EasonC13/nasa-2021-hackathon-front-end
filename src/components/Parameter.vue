@@ -315,23 +315,26 @@ export default {
     }
   },
   mounted () {
+    let default_param = Object.assign(this.param)
     try{
       this.param = JSON.parse(localStorage.param)
     }catch(e){}
     let target_asteroid = this.target_asteroid
+    console.log(target_asteroid)
     if(this.param.key != target_asteroid["3D model link"]){
       this.param.key = target_asteroid["3D model link"]
-      this.param.theta = target_asteroid.theta
-      this.param.phi = target_asteroid.phi
-      this.param.category = target_asteroid["Asteroid category"]
-      this.param.perihelion_distance = target_asteroid["perihelion distance (AU)"]
-      this.param.diameter = target_asteroid["long (km)"]
-      this.param.albedo = target_asteroid["albedo"]
+      this.param.theta = target_asteroid.theta || default_param.theta
+      this.param.phi = target_asteroid.phi || default_param.phi
+      this.param.category = target_asteroid["Asteroid category"] || default_param["Asteroid category"]
+      this.param.perihelion_distance = target_asteroid["perihelion distance (AU)"] || default_param["perihelion distance (AU)"]
+      this.param.diameter = target_asteroid["long (km)"]|| default_param["long (km)"]
+      this.param.albedo = target_asteroid["albedo"] || default_param["albedo"]
       this.param.phase_angle = 0
     }
-    if(this.param.category == ""){
+    if(this.param.category == "" || this.param.category == "user define"){
       this.param.category = this.categories[0]
     }
+    console.log(this.param)
   },
   methods: {
     changeCat(cat){
