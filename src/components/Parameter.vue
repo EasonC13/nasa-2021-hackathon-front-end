@@ -659,11 +659,12 @@
                   </div>
                 </div>
               </div>
-              <img
+              <!-- <img
                 class="w-100"
                 :src="target_asteroid.picture"
                 alt="Card image cap"
-              />
+              /> -->
+              <canvas class="w-100" id="animate"></canvas>
               <div class="clearfix">
                 <p class="lead float-end">
                   {{ target_asteroid.Description }}
