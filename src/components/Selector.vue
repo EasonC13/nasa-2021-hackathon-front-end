@@ -4,13 +4,13 @@
       <div class="clearfix">
         <h2 class="">
             {{step_instruction}}
-            <div class="float-end align-">
+            <div class="float-end">
               <router-link class="btn btn-light me-2" to="About">About This Project</router-link>
               <router-link class="btn btn-primary me-2" to="Parameter">Next</router-link>
             </div>
         </h2>
       </div>
-      <div v-if="step==0">
+      <div>
         <div>
           <div class="overflow-scroll">
             <div class="row" style="height: 75vh">
@@ -74,7 +74,6 @@ export default {
       this.select_index = 0
       localStorage.asteroid = JSON.stringify(this.asteroids[this.select_index])
     }
-
   },
   methods: {
     select(index){

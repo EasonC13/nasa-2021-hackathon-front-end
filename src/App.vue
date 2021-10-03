@@ -20,7 +20,11 @@ export default {
        },
   components: {
     Nav: Nav,
-  }
+  },
+  mounted: function(){
+    localStorage.removeItem("select_index")
+    localStorage.removeItem("param")
+  },
 }
 </script>
 
