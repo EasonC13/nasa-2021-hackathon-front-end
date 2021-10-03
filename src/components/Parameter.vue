@@ -209,14 +209,17 @@
             </div>
             <div class="col-sm-12 col-md-6">
               <p class="h5">The astroid you select is
-                <a :href="target_asteroid.read_more">{{target_asteroid.name}}</a>
+                <a :href="target_asteroid.Wiki_Link">{{target_asteroid.Name}}</a>
               </p>
-              <img class="w-100" :src="target_asteroid.image_url" alt="Card image cap">
-              <p class="lead">
-                {{ target_asteroid.description}}
-                <a :href="target_asteroid.read_more">read more</a>
-                <a :href="target_asteroid.obj_link">Download</a>
-              </p>
+              <img class="w-100" :src="target_asteroid.picture" alt="Card image cap">
+              <div class="clearfix">
+                <p class="lead float-end">
+                  {{ target_asteroid.description}}
+                  <a class='btn btn-light' :href="target_asteroid.Wiki_Link">read more</a>
+                  <a class='btn btn-light' :href="target_asteroid['3D model link']">Download Model</a>
+                </p>
+              </div>
+
 
               <div class="accordion" id="Parameter">
                 <div class="accordion-item">
@@ -227,7 +230,7 @@
                   </h2>
                   <div id="intro_collapseOne" class="accordion-collapse collapse" aria-labelledby="intro_headingOne" data-bs-parent="#Parameter">
                     <div class="accordion-body">
-                      A newly discovered asteroid is given a provisional designation (such as 2002 AT4) consisting of the year of discovery and an alphanumeric code indicating the half-month of discovery and the sequence within that half-month. Once an asteroid’s orbit has been confirmed, it is given a number, and later may also be given a name (e.g. 433 Eros). The formal naming convention uses parentheses around the number – e.g. (433) Eros – but dropping the parentheses is quite common. Informally, it is common to drop the number altogether, or to drop it after the first mention when a name is repeated in running text. In addition, names can be proposed by the asteroid’s discoverer, within guidelines established by the International Astronomical Union. 
+                      A newly discovered asteroid is given a provisional designation (such as 2002 AT4) consisting of the year of discovery and an alphanumeric code indicating the half-month of discovery and the sequence within that half-month. Once an asteroid’s orbit has been confirmed, it is given a number, and later may also be given a name (e.g. 433 Eros). The formal naming convention uses parentheses around the number – e.g. (433) Eros – but dropping the parentheses is quite common. Informally, it is common to drop the number altogether, or to drop it after the first mention when a name is repeated in running text. In addition, names can be proposed by the asteroid’s discoverer, within guidelines established by the International Astronomical Union.
                       <a href="https://en.wikipedia.org/wiki/Asteroid">ref</a>
                     </div>
                   </div>
@@ -255,7 +258,7 @@
                       <p>Rotation model 1 : Rotation around a fixed axis (special case: non-physical model)</p>
                       We assume that the motion of asteroid is rotation around a fixed axis to simplify the setting and calculation. This setting is not the true rotation motion of the asteroid. Really rotating motion, the axis of rotation will also rotate, especially the rod-shaped or flatter (non-spherical)
                       <a href="https://www.youtube.com/watch?v=9QXRIinrGS0&ab_channel=RussEdmonds">example</a>
-                      , but to calculate this requires numerical integration of the asteroid’s moment of inertia. Some of the moment of inertia distribution does not have an analytical solution, and it is necessary to solve the Euler equation numerically: 
+                      , but to calculate this requires numerical integration of the asteroid’s moment of inertia. Some of the moment of inertia distribution does not have an analytical solution, and it is necessary to solve the Euler equation numerically:
                       <a href="https://www.youtube.com/watch?v=1VPfZ_XzisU">Veritasium介紹The Bizarre Behavior of Rotating Bodies</a>
                       <br/><br/>
                       <p>Rotation model 2 : Symmetric top precession model (physical model)</p>

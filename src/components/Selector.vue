@@ -20,13 +20,27 @@
                 <div class="card" :class="{
                   card_selected: index==select_index,
                   card_unselected: index!=select_index,}">
-                  <img class="card-img-top" :src="asteroid.image_url" alt="Card image cap">
+                  <img class="card-img-top" :src="asteroid.picture" alt="Card image cap">
                   <div class="card-body">
-                    <h5 class="card-title">{{asteroid.name}}</h5>
-                    <p class="card-text">{{asteroid.description.substring(0, 150) + "..."}}</p>
+                    <h5 class="card-title">{{asteroid.Name}}</h5>
+                    <p>Category: {{asteroid["Asteroid category"]}}</p>
+                    <p class="card-text">{{asteroid.Description.substring(0, 150) + " "}}<a :href="asteroid.read_more" class="text-secondary">...more</a></p>
+                    <div class="text-end">
+                      <a :href="asteroid.Wiki_Link" class="float-right">Know more</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-12 col-lg-3" style="padding-bottom: 1%;">
+                <div class="card">
+                  <img class="card-img-top" src="https://i.imgur.com/0FsOqHl.png" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Upload One</h5>
+                    <p>Upload an astroid and check it's Light Curve.</p>
+                    <!-- <p class="card-text">{{asteroid.Description.substring(0, 150) + " "}}<a :href="asteroid.read_more" class="text-secondary">...more</a></p>
                     <div class="text-end">
                       <a :href="asteroid.read_more" class="float-right">Know more</a>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -52,14 +66,6 @@ export default {
       step_instruction: "Select your asteroids",
       asteroids : require("../assets/available_asteroids.json"),
       select_index: 0,
-      param: {
-        rotateT: 0,
-        rotateF: 0,
-        rotate_period: 1,
-        avg_semi_major_axis: 0,
-        radius: 1,
-        absolute_magnitude: 0,
-      },
     }
   },
   computed: {
