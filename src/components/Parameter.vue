@@ -44,11 +44,13 @@
                           </span><span class="unit">°</span></span>
                         </div>
                       </div>
-
                     </h3>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        Rotation axis vector is the spin axis direction of the asteroids. We set this vector in spherical coordinate in fix body frame.  Its polar angle measured from a fixed zenith direction, and the azimuthal angle of its orthogonal projection on a reference plane that passes through the origin and is orthogonal to the zenith, measured from a fixed reference direction(body x axis direction) on that plane. For example the direction  $\hat r = (1, 0\ deg, 0\ deg)$ is the vector $\vec v = (0,0,1)$ ( the z axis)in celestial coordinate systems in  fix body frame.
+                        Rotation axis vector is the spin axis direction of the asteroids. We set this vector in spherical coordinate in fix body frame.  Its polar angle measured from a fixed zenith direction, and the azimuthal angle of its orthogonal projection on a reference plane that passes through the origin and is orthogonal to the zenith, measured from a fixed reference direction(body x axis direction) on that plane. For example the direction
+                        <span ref="mathJaxEl" class="e-mathjax">$\hat r = (1, 0\ deg, 0\ deg)$ </span>
+                        is the vector
+                        $\vec v = (0,0,1)$ ( the z axis)in celestial coordinate systems in  fix body frame.
                         <br/>
                         <img src="https://i.imgur.com/HBiqxAj.png" alt="">
                       </div>
@@ -202,8 +204,6 @@
                       </div>
                     </div>
                   </div>
-
-
                 </div>
               </div>
             </div>
@@ -214,9 +214,9 @@
               <img class="w-100" :src="target_asteroid.picture" alt="Card image cap">
               <div class="clearfix">
                 <p class="lead float-end">
-                  {{ target_asteroid.description}}
-                  <a class='btn btn-light' :href="target_asteroid.Wiki_Link" target="_blank">Know more about {{target_asteroid.Name}}</a>
-                  <a class='btn btn-light' :href="target_asteroid['3D model link']" target="_blank">Download {{target_asteroid["3D model filename"]}}</a>
+                  {{ target_asteroid.Description}}
+                  <a class='btn btn-light' :href="target_asteroid.Wiki_Link" target="_blank">read more</a>
+                  <a class='btn btn-light' :href="target_asteroid['3D model link']" target="_blank">Download Model</a>
                 </p>
               </div>
 
@@ -275,11 +275,9 @@
   </div>
 </template>
 <script>
-import { VueMathjax } from "vue-mathjax";
 export default {
   name: "Parameter",
   components: {
-    "vue-mathjax": VueMathjax
   },
   data () {
     return {
@@ -318,6 +316,7 @@ export default {
     let default_param = Object.assign(this.param)
     try{
       this.param = JSON.parse(localStorage.param)
+      console.log(target_asteroid);
     }catch(e){}
     let target_asteroid = this.target_asteroid
     console.log(target_asteroid)
@@ -342,8 +341,32 @@ export default {
     },
     pass(e){
       // e.stopPropagation()
+    },
+    renderMathJax () {
+      if(window.MathJax) {
+        window.MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\(","\)"] ],
+            displayMath: [ ['$$','$$'], ["\[","\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          // Center justify equations in code and markdown cells. Elsewhere
+          // we use CSS to left justify single line equations in code cells.
+          displayAlign: 'center',
+          "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+          }
+        });
+        window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub,this.$refs.mathJaxEl]);
+      }
     }
-  }
+  }, head: {
+    script: [
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML' }
+    ]
+  },
 }
 
 </script>

@@ -6,6 +6,7 @@ import Rendering from '@/components/Rendering'
 import scene_test from "@/components/Scene_Test"
 import About from "@/components/About"
 import Parameter from "@/components/Parameter"
+import question from "@/components/question"
 
 Vue.use(Router)
 
@@ -39,5 +40,10 @@ export default new Router({
       name: 'scene_test',
       component: scene_test
     },
+    {
+      path: '/question',
+      name: 'question',
+      component: question
+    }
   ]
 })

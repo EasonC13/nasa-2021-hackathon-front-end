@@ -41,7 +41,7 @@
           <p class='h2'>About</p>
 
           <p>
-            {{ target_asteroid.description }}
+            {{ target_asteroid.Description }}
           </p>
           <div>
             LightCurve
@@ -52,7 +52,7 @@
         </div>
         <div class="col-6 sub">
 
-          <img class="w-75" :src="target_asteroid.image_url" />
+          <img class="w-75" :src="target_asteroid.picture" />
         </div>
       </div>
       <button @click="mouseover"></button>
@@ -73,8 +73,8 @@ function initAnimate(asteriod, param, data) {
   let canvas;
   let renderer;
   let mainOBJ;
-  let theta = param.rotateT;
-  let phi = param.rotateF;
+  let theta = param.theta;
+  let phi = param.phi;
   let dt = 1;
   let period = 180;
   let now = 0;
@@ -93,6 +93,7 @@ function initAnimate(asteriod, param, data) {
     let d = Math.pow(AREA / 4 / Math.PI, 0.5);
     let H = -26.74 - 5 * Math.log10((Math.pow(albedo, 0.5) * d) / 2 / AU);
     let m = H + 5 * Math.log10((perihelion * Dbs) / Math.pow(AU, 2));
+    m.toFixed(2);
     console.log(m);
     return m;
   }
@@ -135,8 +136,8 @@ function initAnimate(asteriod, param, data) {
 
     // console.log(whitePixal, allPixal);
     if (now < 360 && whitePixal > 0) {
-      data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
-      // data.push([now++, caculateMagnitude(whitePixal)]);
+      // data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
+      data.push([now++, caculateMagnitude(whitePixal)]);
     }
   }
 
@@ -390,12 +391,13 @@ export default {
         },
         yAxis: {
           name: "brightness gain",
-          min: -20,
-          max: 20,
+          inverse: true,
+          min: 'dataMin',
+          max: 'dataMax'
         },
         series: [
           {
-            symbolSize: 10,
+            symbolSize: 8,
             data: [],
             type: "scatter",
           },
