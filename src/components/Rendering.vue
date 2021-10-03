@@ -81,24 +81,26 @@ function initAnimate(asteriod, param, data) {
   let dt = 1;
   let period = 180;
   let now = 0;
-  let scale = 1;
+  let scale = null;
   let AU = 149597870.7;
+  param.perihelion_distance = param.perihelion_distance ? param.perihelion_distance : 2;
+  param.albedo = param.albedo ? param.albedo : 1;
   let perihelion = param.perihelion_distance * AU; // need to add
   let albedo = param.albedo; // need to add
 
-  function caculateMagnitude(pixels) {
-    let Dbs = Math.abs(perihelion - AU);
-
-    let normalize_factor = scale;
-
-    let AREA =
-      Math.pow(50, 2) / 230400 * pixels * Math.pow(normalize_factor, -2);
-    let d = Math.pow(AREA / 4 / Math.PI, 0.5);
-    let H = -26.74 - 5 * Math.log10((Math.pow(albedo, 0.5) * d) / 2 / AU);
-    let m = H + 5 * Math.log10((perihelion * Dbs) / Math.pow(AU, 2));
-    m.toFixed(2);
-    console.log(m);
-    return m;
+  function caculateMagnitude(pixels) { 
+    let Dbs = Math.abs(perihelion - AU); 
+ 
+    let normalize_factor = scale; 
+ 
+    let AREA = 
+      Math.pow(50, 2) / 230400*8 * pixels * Math.pow(normalize_factor, -2); 
+    let d = Math.pow(AREA / Math.PI, 0.5); 
+    let H = -26.74 - 5 * Math.log10((Math.pow(albedo, 0.5) * d) / 2 / AU); 
+    let m = H + 5 * Math.log10((perihelion * Dbs) / Math.pow(AU, 2)); 
+    m.toFixed(2); 
+    console.log(m); 
+    return m; 
   }
   // console.log(caculateMagnitude(230400));
 
@@ -138,7 +140,7 @@ function initAnimate(asteriod, param, data) {
     }
 
     // console.log(whitePixal, allPixal);
-    if (now < 360 && whitePixal > 1000) {
+    if (scale && now < 360 && whitePixal > 1000) {
       // data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
       data.push([now++, caculateMagnitude(whitePixal)]);
     }
@@ -147,8 +149,8 @@ function initAnimate(asteriod, param, data) {
     const color = 0xffffff;
     const intensity = 1;
     const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(0, 0, 100);
-    light.target.position.set(0, 0, -100);
+    light.position.set(100, 0, 0);
+    light.target.position.set(-100, 0, 0);
     scene.add(light);
     scene.add(light.target);
   }
@@ -159,7 +161,7 @@ function initAnimate(asteriod, param, data) {
     const near = 0.01;
     const far = 1000;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(0, 0, 100);
+    camera.position.set(100, 0, 0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
   }
 
@@ -171,7 +173,7 @@ function initAnimate(asteriod, param, data) {
     var box3 = new THREE.Box3();
     box3.setFromObject(helper); // or from mesh, same answer
     // camera.position.set(0, box3.max.y + 100, 0);
-    camera.position.set(0, 0, box3.max.z + 100);
+    camera.position.set(box3.max.x + 100, 0, 0);
   }
 
   let arrowHelper;
@@ -308,7 +310,7 @@ function initModel(asteriod, param) {
     const near = 0.01;
     const far = 1000;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(0, 0, 100);
+    camera.position.set(100, 0, 0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
   }
 
@@ -329,7 +331,7 @@ function initModel(asteriod, param) {
     if (visible) scene.add(helper);
     var box3 = new THREE.Box3();
     box3.setFromObject(helper); // or from mesh, same answer
-    camera.position.set(0, 0, box3.max.z + 100);
+    camera.position.set(box3.max.x + 100, 0, 0);
   }
 
   function caculateScale(obj) {
