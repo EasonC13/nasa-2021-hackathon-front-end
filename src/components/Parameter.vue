@@ -48,7 +48,9 @@
                     </h3>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <vue-mathjax :formula="formula"></vue-mathjax>
+                        Rotation axis vector is the spin axis direction of the asteroids. We set this vector in spherical coordinate in fix body frame.  Its polar angle measured from a fixed zenith direction, and the azimuthal angle of its orthogonal projection on a reference plane that passes through the origin and is orthogonal to the zenith, measured from a fixed reference direction(body x axis direction) on that plane. For example the direction  $\hat r = (1, 0\ deg, 0\ deg)$ is the vector $\vec v = (0,0,1)$ ( the z axis)in celestial coordinate systems in  fix body frame.
+                        <br/>
+                        <img src="https://i.imgur.com/HBiqxAj.png" alt="">
                       </div>
                     </div>
                   </div>
@@ -75,7 +77,33 @@
                     </h3>
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <img src="https://i.imgur.com/Mgd15QU.png" alt="">
+                        <ul>
+                          <li>Main belt</li>
+                          <li>Trojans asteroids</li>
+                          <li>Hildas asteroids</li>
+                          <li>
+                            Near-Earth Apollos class
+                            <ul>
+                              <li>The Apollo asteroids are Earth-crossing asteroids that have an orbital semi-major axis greater than that of the Earth (a > 1 AU) but perihelion distances less than the Earth’s aphelion distance (q &lt; 1.017 AU)</li>
+                            </ul>
+                            <img src="https://i.imgur.com/m8owuQh.png" alt="" class="intro_img">
+                          </li>
+                          <li>
+                            Near-Earth Amors class
+                            <ul>
+                              <li>The Amor asteroids asteroids whose orbital perihelion of these objects is close to, but greater than, the orbital aphelion of Earth (i.e., the objects do not cross Earth’s orbit), with most Amors crossing the orbit of Mars.</li>
+                            </ul>
+                            <img src="https://i.imgur.com/NBZM2Gm.png" alt="" class="intro_img">
+                          </li>
+                          <li>
+                            Near-Earth Aten asteroids
+                            <ul>
+                              <li>The Aten asteroids are a dynamical group of asteroids whose orbits bring them into proximity with Earth. By definition, Atens are Earth-crossing asteroids (a &lt; 1.0 AU and Q > 0.983 AU).</li>
+                            </ul>
+                            <img src="https://i.imgur.com/rzhMjgm.png" alt="" class="intro_img">
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
@@ -99,7 +127,8 @@
                     </h3>
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <img src="https://i.imgur.com/mBhfBCP.png" alt="" class="intro_img"><br/>
+                        The Asteroid’s two apsides are the farthest point, aphelion, and the nearest point, perihelion, of its orbit around the host Sun. The terms aphelion and perihelion apply in the same way to the orbits of Jupiter and the other planets, the comets of the Solar System.
                       </div>
                     </div>
                   </div>
@@ -123,7 +152,7 @@
                     </h3>
                     <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <strong>This is the four item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        The average Diameter of asteroid.
                       </div>
                     </div>
                   </div>
@@ -148,7 +177,9 @@
                     </h3>
                     <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <strong>This is the four item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        Albedo (/ælˈbiːdoʊ/; from Latin albedo ‘whiteness’) is the measure of the diffuse reflection of solar radiation out of the total solar radiation and measured on a scale from 0, corresponding to a black body that absorbs all incident radiation, to 1, corresponding to a body that reflects all incident radiation.
+                        <br/>
+                        We need the Albedo of an asteroid to culculate the absolute magnitude and the apparent magnitude.
                       </div>
                     </div>
                   </div>
@@ -166,7 +197,8 @@
                     </h3>
                     <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <strong>This is the four item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        Phase angle in astronomical observations is the angle between the light incident onto an observed object and the light reflected from the object. In the context of astronomical observations, this is usually the angle Sun-object-observer.In order to simplify the problem, we set the phase angle = 0 and the asteroid is in conditions of ideal solar opposition.
+                        <br/><img src="https://i.imgur.com/psOphVP.png" alt="" class="intro_img">
                       </div>
                     </div>
                   </div>
@@ -180,21 +212,58 @@
                 <a :href="target_asteroid.read_more">{{target_asteroid.name}}</a>
               </p>
               <img class="w-100" :src="target_asteroid.image_url" alt="Card image cap">
+              <p class="lead">
+                {{ target_asteroid.description}}
+                <a :href="target_asteroid.read_more">read more</a>
+                <a :href="target_asteroid.obj_link">Download</a>
+              </p>
+
               <div class="accordion" id="Parameter">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="intro_headingOne">
-                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#intro_collapseOne" aria-expanded="true" aria-controls="intro_collapseOne">
-                        Astroid NAME
-                      </button>
-                    </h2>
-                    <div id="intro_collapseOne" class="accordion-collapse collapse show" aria-labelledby="intro_headingOne" data-bs-parent="#Parameter">
-                      <div class="accordion-body">
-                        A newly discovered asteroid is given a provisional designation (such as 2002 AT4) consisting of the year of discovery and an alphanumeric code indicating the half-month of discovery and the sequence within that half-month. Once an asteroid’s orbit has been confirmed, it is given a number, and later may also be given a name (e.g. 433 Eros). The formal naming convention uses parentheses around the number – e.g. (433) Eros – but dropping the parentheses is quite common. Informally, it is common to drop the number altogether, or to drop it after the first mention when a name is repeated in running text. In addition, names can be proposed by the asteroid’s discoverer, within guidelines established by the International Astronomical Union. 
-                        <a href="https://en.wikipedia.org/wiki/Asteroid">ref</a>
-                      </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="intro_headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#intro_collapseOne" aria-expanded="true" aria-controls="intro_collapseOne">
+                      Astroid NAME
+                    </button>
+                  </h2>
+                  <div id="intro_collapseOne" class="accordion-collapse collapse" aria-labelledby="intro_headingOne" data-bs-parent="#Parameter">
+                    <div class="accordion-body">
+                      A newly discovered asteroid is given a provisional designation (such as 2002 AT4) consisting of the year of discovery and an alphanumeric code indicating the half-month of discovery and the sequence within that half-month. Once an asteroid’s orbit has been confirmed, it is given a number, and later may also be given a name (e.g. 433 Eros). The formal naming convention uses parentheses around the number – e.g. (433) Eros – but dropping the parentheses is quite common. Informally, it is common to drop the number altogether, or to drop it after the first mention when a name is repeated in running text. In addition, names can be proposed by the asteroid’s discoverer, within guidelines established by the International Astronomical Union. 
+                      <a href="https://en.wikipedia.org/wiki/Asteroid">ref</a>
                     </div>
                   </div>
                 </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="intro_headingTwo">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#intro_collapseTwo" aria-expanded="true" aria-controls="intro_collapseTwo">
+                      Rotation Period (hr)
+                    </button>
+                  </h2>
+                  <div id="intro_collapseTwo" class="accordion-collapse collapse" aria-labelledby="intro_headingTwo" data-bs-parent="#Parameter">
+                    <div class="accordion-body">
+                      The rotation period of the asteroid around Rotation axis vector where is angular speed direction, counterclockwisely.
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="intro_headingThree">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#intro_collapseThree" aria-expanded="true" aria-controls="intro_collapseThree">
+                      Rotation model
+                    </button>
+                  </h2>
+                  <div id="intro_collapseThree" class="accordion-collapse collapse" aria-labelledby="intro_headingThree" data-bs-parent="#Parameter">
+                    <div class="accordion-body">
+                      <p>Rotation model 1 : Rotation around a fixed axis (special case: non-physical model)</p>
+                      We assume that the motion of asteroid is rotation around a fixed axis to simplify the setting and calculation. This setting is not the true rotation motion of the asteroid. Really rotating motion, the axis of rotation will also rotate, especially the rod-shaped or flatter (non-spherical)
+                      <a href="https://www.youtube.com/watch?v=9QXRIinrGS0&ab_channel=RussEdmonds">example</a>
+                      , but to calculate this requires numerical integration of the asteroid’s moment of inertia. Some of the moment of inertia distribution does not have an analytical solution, and it is necessary to solve the Euler equation numerically: 
+                      <a href="https://www.youtube.com/watch?v=1VPfZ_XzisU">Veritasium介紹The Bizarre Behavior of Rotating Bodies</a>
+                      <br/><br/>
+                      <p>Rotation model 2 : Symmetric top precession model (physical model)</p>
+                      In order to simplify the calculation complexity under the physical conditions, we assume such a model based on the geometric configuration of the asteroid. This model is the simplest model that can simulate precession. Assuming that the object is axisymmetric, I1 = 12 is not equal to I3.
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -281,5 +350,7 @@ export default {
     outline: none;
     box-shadow: none;
   }
-
+  .intro_img {
+    width: 100%;
+  }
 </style>

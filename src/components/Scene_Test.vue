@@ -159,7 +159,7 @@ export default {
     let filename="Vesta.obj"
     // filename = 'Toutatis_hirestoutatis.obj'
     if(filename.includes(".obj")){
-      let objLoader = new THREE.OBJLoader();
+      // let objLoader = new THREE.OBJLoader();
       objLoader.load(path+filename, (obj) => {
         mainOBJ = obj;
         obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
