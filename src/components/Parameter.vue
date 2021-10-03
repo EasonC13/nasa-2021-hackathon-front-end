@@ -214,7 +214,7 @@
               <img class="w-100" :src="target_asteroid.picture" alt="Card image cap">
               <div class="clearfix">
                 <p class="lead float-end">
-                  {{ target_asteroid.description}}
+                  {{ target_asteroid.Description}}
                   <a class='btn btn-light' :href="target_asteroid.Wiki_Link">read more</a>
                   <a class='btn btn-light' :href="target_asteroid['3D model link']">Download Model</a>
                 </p>
@@ -315,6 +315,7 @@ export default {
   mounted () {
     try{
       this.param = JSON.parse(localStorage.param)
+      console.log(target_asteroid);
     }catch(e){}
     let target_asteroid = this.target_asteroid
     if(this.param.key != target_asteroid["3D model link"]){
