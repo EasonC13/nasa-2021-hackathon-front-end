@@ -5,8 +5,8 @@
         <h2 class="">
             {{step_instruction}}
             <div class="float-end align-">
-              <router-link class="btn btn-secondary me-2" to="Selector">Back</router-link>
-              <router-link class="btn btn-primary me-2" to="Renderer">Render</router-link>
+              <router-link class="btn btn-light me-2" to="Selector">Back</router-link>
+              <router-link class="btn btn-primary me-2" to="Renderer">Next</router-link>
             </div>
         </h2>
       </div>

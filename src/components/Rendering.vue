@@ -1,5 +1,14 @@
 <template>
   <div class="container">
+    <div class="clearfix">
+        <h2 class="">
+            Renderer
+            <div class="float-end align-">
+              <router-link class="btn btn-light me-2" to="Parameter">Back</router-link>
+              <router-link class="btn btn-primary me-2" to="Selector">Select New</router-link>
+            </div>
+        </h2>
+    </div>
     <div class="row">
       <div class="col-8 main">
         <div>
@@ -26,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="">
       <div class="row">
         <div class="col-6 sub">
           關於此行星

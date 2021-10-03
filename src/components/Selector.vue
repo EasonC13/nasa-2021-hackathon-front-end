@@ -5,6 +5,7 @@
         <h2 class="">
             {{step_instruction}}
             <div class="float-end align-">
+              <router-link class="btn btn-light me-2" to="About">About This Project</router-link>
               <router-link class="btn btn-primary me-2" to="Parameter">Next</router-link>
             </div>
         </h2>
@@ -67,7 +68,13 @@ export default {
     }
   },
   mounted () {
-    this.select_index = localStorage.select_index
+    if(localStorage.select_index != undefined){
+      this.select_index = localStorage.select_index
+    }else{
+      this.select_index = 0
+      localStorage.asteroid = JSON.stringify(this.asteroids[this.select_index])
+    }
+
   },
   methods: {
     select(index){
