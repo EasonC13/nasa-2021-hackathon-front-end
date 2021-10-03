@@ -16,17 +16,6 @@
           <div class="overflow-scroll">
             <div class="row" style="height: 75vh">
               <Upload></Upload>
-              <!-- <div class="col-md-4 col-sm-12 col-lg-3" style="padding-bottom: 1%;">
-                <div class="card" @click="triggerUpload">
-                  <img class="card-img-top" src="https://i.imgur.com/0FsOqHl.png" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Upload One (.obj)</h5>
-                    <p>Upload an astroid and check it's Light Curve base on it's .obj file.</p>
-                    <input type="file" accept=".obj" fileCount=1
-                    @change="handleUpload($event.target.files)" v-show='true'>
-                  </div>
-                </div>
-              </div> -->
 
 
               <div class="col-md-4 col-sm-12 col-lg-3" style="padding-bottom: 1%;"
@@ -105,13 +94,6 @@ export default {
     },
     triggerUpload(){
 
-    },
-    async handleUpload(file){
-      file = file[0]
-      let obj_text = await file.text()
-      localStorage.custom_obj = obj_text
-      console.log("file", file)
-      window.uploadfile = file
     },
     clear_upload(){
       if (confirm('Are you sure you want to remove all uploaded custom objects?')) {

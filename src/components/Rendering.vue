@@ -252,7 +252,7 @@ function initAnimate(asteriod, param, data) {
 
   const objLoader = new OBJLoader();
   if(asteriod.type == "upload"){
-    var obj = objLoader.parse(localStorage.custom_obj);
+    var obj = objLoader.parse(asteriod.file_text);
     mainOBJ = obj;
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
@@ -376,7 +376,7 @@ function initModel(asteriod, param) {
 
   const objLoader = new OBJLoader();
   if(asteriod.type == "upload"){
-    var obj = objLoader.parse(localStorage.custom_obj);
+    var obj = objLoader.parse(asteriod.file_text);
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
   }else{
