@@ -223,7 +223,7 @@ function initAnimate(asteriod, param, data) {
   addLight();
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/kleo.obj", (obj) => {
+  objLoader.load("/static/objs/Vesta.obj", (obj) => {
     mainOBJ = obj;
     obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
     scene.add(obj);
@@ -239,18 +239,28 @@ function initModel(asteriod, param) {
   let camera;
   let canvas;
   let renderer;
-  let mainOBJ;
-  let theta = 60;
-  let phi = 50;
-  let dt = 1;
-  let period = 180;
 
   function addLight() {
     const color = 0xffffff;
-    const intensity = 1;
-    const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(0, 100, 0);
-    light.target.position.set(0, -100, 0);
+    const intensity = 0.5;
+    let light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(100, 100, 0);
+    light.target.position.set(-100, -100, 0);
+    scene.add(light);
+    scene.add(light.target);
+    light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-100, 100, 0);
+    light.target.position.set(-100, -100, 0);
+    scene.add(light);
+    scene.add(light.target);
+    light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-100, -100, 0);
+    light.target.position.set(100, 100, 0);
+    scene.add(light);
+    scene.add(light.target);
+    light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(100, -100, 0);
+    light.target.position.set(-100, 100, 0);
     scene.add(light);
     scene.add(light.target);
   }
@@ -328,8 +338,7 @@ function initModel(asteriod, param) {
   addAxes();
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/kleo.obj", (obj) => {
-    mainOBJ = obj;
+  objLoader.load("/static/objs/Vesta.obj", (obj) => {
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
     addHelper(obj, true);
