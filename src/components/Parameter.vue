@@ -624,9 +624,14 @@
                       data-bs-target="#intro_collapseOne"
                       aria-expanded="true"
                       aria-controls="intro_collapseOne">
-                  <h2 class="accordion-header float-start" >
+                  <h2 class="accordion-header float-start" v-if='target_asteroid["#"]!=undefined'>
 
                       {{ target_asteroid["#"] + " " + target_asteroid.Name }}
+
+                  </h2>
+                  <h2 class="accordion-header float-start" v-if='target_asteroid["#"]==undefined'>
+
+                      {{ target_asteroid.Name }}
 
                   </h2>
                   <i class="bi bi-question-circle float-end h2"></i>
