@@ -373,7 +373,62 @@
                       </div>
                     </div>
                   </div>
-
+                  <!--wide-->
+                  <div class="accordion-item">
+                    <h3 class="accordion-header" id="wide">
+                      <div class="ps-3">
+                        <button
+                          class="
+                            float-end
+                            btn
+                            button-light
+                            d-inline
+                            no-focus-btn
+                          "
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#wide_one"
+                          aria-expanded="false"
+                          aria-controls="wide_one"
+                        >
+                          <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div
+                          class="h4 d-inline"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#wide_one"
+                          aria-expanded="false"
+                          aria-controls="wide_one"
+                        >
+                          wide
+                        </div>
+                        <div class="d-inline">
+                          <input
+                            id=""
+                            type="range"
+                            value="5"
+                            min="1"
+                            max="11"
+                            step="1"
+                            :disabled="false"
+                          />
+                        </div>
+                        5KM
+                      </div>
+                    </h3>
+                    <div
+                      id="wide_one"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="wide_one"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div class="accordion-body">
+                        wide_intro
+                      </div>
+                    </div>
+                  </div>
+                  <!--wide-->
                   <div class="accordion-item">
                     <h3 class="accordion-header" id="headingFive">
                       <div class="ps-3">
@@ -998,43 +1053,6 @@ export default {
     pass(e) {
       // e.stopPropagation()
     },
-    renderMathJax() {
-      if (window.MathJax) {
-        window.MathJax.Hub.Config({
-          tex2jax: {
-            inlineMath: [
-              ["$", "$"],
-              ["(", ")"],
-            ],
-            displayMath: [
-              ["$$", "$$"],
-              ["[", "]"],
-            ],
-            processEscapes: true,
-            processEnvironments: true,
-          },
-          // Center justify equations in code and markdown cells. Elsewhere
-          // we use CSS to left justify single line equations in code cells.
-          displayAlign: "center",
-          "HTML-CSS": {
-            styles: { ".MathJax_Display": { margin: 0 } },
-            linebreaks: { automatic: true },
-          },
-        });
-        window.MathJax.Hub.Queue([
-          "Typeset",
-          window.MathJax.Hub,
-          this.$refs.mathJaxEl,
-        ]);
-      }
-    },
-  },
-  head: {
-    script: [
-      {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML",
-      },
-    ],
   },
 };
 </script>
