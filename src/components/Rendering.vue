@@ -29,7 +29,7 @@
             @mouseleave="monseleave"
             class="col-12 col-sm-12 sub"
           >
-            <v-chart :option="lightcurve_option" />
+            <v-chart :option="lightcurve_option" v-if="flag"/>
           </div>
         </div>
       </div>
@@ -377,6 +377,7 @@ export default {
   data() {
     return {
       param: {},
+      flag: false,
       asteriod: {},
       animation: false,
       lightcurve_option: {
