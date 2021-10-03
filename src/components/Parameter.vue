@@ -577,8 +577,20 @@
                           data-bs-target="#collapseSeven"
                           aria-expanded="false"
                           aria-controls="collapseSeven"
+                          v-if="can_edit_rotation_period"
                         >
                           Rotation Period = {{ target_asteroid["Rotation period(hr)"]}} (hr)
+                        </div>
+                        <div
+                          class="h4 d-inline"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseSeven"
+                          aria-expanded="false"
+                          aria-controls="collapseSeven"
+                          v-if="can_edit_rotation_period==false"
+                        >
+                          Rotation Period uneditable
                         </div>
                       </div>
                     </h3>
@@ -589,9 +601,13 @@
                       data-bs-parent="#accordionExample"
                     >
                       <div class="accordion-body">
-                        The rotation period of the asteroid around Rotation axis
+                        <p>The rotation period of the asteroid around Rotation axis
                         vector where is angular speed direction,
-                        counterclockwisely.
+                        counterclockwisely. </p>
+                        <p>
+                          Rotation period's value can't be edit at custom asteroid object.
+                        </p>
+
                       </div>
                     </div>
                   </div>
@@ -1024,6 +1040,7 @@ export default {
         "Asteroid category",
         "Absolute magnitude (H)",
       ],
+      can_edit_rotation_period: true,
     };
   },
   watch: {
@@ -1047,6 +1064,8 @@ export default {
     },
   },
   mounted() {
+    this.can_edit_rotation_period = this.categories.includes(this.target_asteroid.category)
+
     let default_param = Object.assign(this.param);
     try {
       this.param = JSON.parse(localStorage.param);
