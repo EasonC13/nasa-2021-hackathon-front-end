@@ -390,12 +390,13 @@ export default {
         },
         yAxis: {
           name: "brightness gain",
+          inverse: true,
           min: -20,
           max: 20,
         },
         series: [
           {
-            symbolSize: 10,
+            symbolSize: 8,
             data: [],
             type: "scatter",
           },
