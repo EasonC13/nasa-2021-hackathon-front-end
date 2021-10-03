@@ -24,14 +24,17 @@
             <img class="w-75" :src="asteroids_image_url"> -->
             <canvas id="model"></canvas>
           </div>
+          <div v-if="!flag">
+            計算中
+          </div>
           <div
             @mouseover="mouseover"
             @mouseleave="monseleave"
             class="col-12 col-sm-12 sub"
+            v-if="flag"
           >
-            <v-chart :option="lightcurve_option" />
+            <v-chart :option="lightcurve_option"/>
           </div>
-          <!-- <v-chart class="col-12 col-sm-12 sub" :option="lightcurve_option"/> -->
         </div>
       </div>
     </div>
@@ -85,8 +88,6 @@ function initAnimate(asteriod, param, data) {
   let perihelion = param.perihelion_distance * AU; // need to add
   let albedo = param.albedo; // need to add
 
-  let maxWhite = 0;
-
   function caculateMagnitude(pixels) { 
     let Dbs = Math.abs(perihelion - AU); 
  
@@ -139,14 +140,11 @@ function initAnimate(asteriod, param, data) {
     }
 
     // console.log(whitePixal, allPixal);
-    maxWhite = Math.max(maxWhite, whitePixal);
-    console.log(maxWhite)
     if (scale && now < 360 && whitePixal > 1000) {
       // data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
       data.push([now++, caculateMagnitude(whitePixal)]);
     }
   }
-
   function addLight() {
     const color = 0xffffff;
     const intensity = 1;
@@ -255,12 +253,21 @@ function initAnimate(asteriod, param, data) {
   addVecotr();
 
   const objLoader = new OBJLoader();
-  objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
+  if(asteriod.type == "upload"){
+    var obj = objLoader.parse(localStorage.custom_obj);
     mainOBJ = obj;
-    obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
+    obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
     addHelper(obj, false);
-  });
+  }else{
+      objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
+      mainOBJ = obj;
+      obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
+      scene.add(obj);
+      addHelper(obj, false);
+    });
+  }
+
   countPixel();
   requestAnimationFrame(render);
 }
@@ -370,11 +377,19 @@ function initModel(asteriod, param) {
   addAxes();
 
   const objLoader = new OBJLoader();
-  objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
+  if(asteriod.type == "upload"){
+    var obj = objLoader.parse(localStorage.custom_obj);
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
-    addHelper(obj, true);
+  }else{
+    objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
+      obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+      scene.add(obj);
+      addHelper(obj, true);
   });
+  }
+
+
   requestAnimationFrame(render);
 }
 
@@ -384,6 +399,7 @@ export default {
   data() {
     return {
       param: {},
+      flag: false,
       asteriod: {},
       animation: false,
       lightcurve_option: {
@@ -431,6 +447,7 @@ export default {
             symbolSize: 8,
             data: [],
             type: "scatter",
+            large: true,
           },
         ],
       },
@@ -460,7 +477,13 @@ export default {
     this.time = setInterval(this.change, 100);
 
     //Compute
+    let vm = this;
     initAnimate(this.asteriod, this.param, this.lightcurve_option.series[0].data);
+    setTimeout(function(){
+        vm.flag = true;
+        // console.log("10 seconds");
+    },10000);
+    // initAnimate(this.asteriod, this.param, this.lightcurve_option.series[0].data);
     initModel(this.asteriod, this.param);
   },
   computed: {

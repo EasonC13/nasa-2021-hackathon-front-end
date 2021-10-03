@@ -7,6 +7,7 @@ import scene_test from "@/components/Scene_Test"
 import About from "@/components/About"
 import Parameter from "@/components/Parameter"
 import question from "@/components/question"
+import Upload from "@/components/Upload"
 
 Vue.use(Router)
 
@@ -44,6 +45,11 @@ export default new Router({
       path: '/question',
       name: 'question',
       component: question
-    }
+    },
+    {
+      path: '/upload',
+      name: 'Upload',
+      component: Upload
+    },
   ]
 })
