@@ -88,7 +88,7 @@ function initAnimate(data) {
     let normalize_factor = scale;
 
     let AREA =
-      Math.pow(50, 2) * 230400 * pixels * Math.pow(normalize_factor, -2);
+      Math.pow(50, 2) / 230400 * pixels * Math.pow(normalize_factor, -2);
     let d = Math.pow(AREA / 4 / Math.PI, 0.5);
     let H = -26.74 - 5 * Math.log10((Math.pow(albedo, 0.5) * d) / 2 / AU);
     let m = H + 5 * Math.log10((perihelion * Dbs) / Math.pow(AU, 2));
