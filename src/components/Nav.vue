@@ -34,7 +34,7 @@
           <router-link class="nav-link text-decoration-none" :class="{
             'link-dark': currentRouteName!='Renderer',
             'link-primary': currentRouteName=='Renderer'}"
-           aria-current="page" to="Renderer">3. Renderer</router-link>
+           aria-current="page" to="Renderer">3. Light curve analysis</router-link>
         </li>
         <li class="nav-item dropdown btn">
           <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
