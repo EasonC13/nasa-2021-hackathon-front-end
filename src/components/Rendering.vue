@@ -343,6 +343,7 @@ export default {
   data() {
     return {
       param: {},
+      asteriod: {},
       description: localStorage["description"],
       asteroids_image_url: localStorage["url"],
       lightcurve_option: {
