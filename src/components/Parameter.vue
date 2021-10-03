@@ -1079,7 +1079,6 @@ export default {
     },
     chageRotationModel(cat){
       this.param.rotation_model = cat;
-      alert(this.param.rotation_model)
     },
     pass(e) {
       // e.stopPropagation()
