@@ -65,30 +65,30 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-function initAnimate(data) {
+function initAnimate(asteriod, param, data) {
   const MAXSIZE = 50;
   let scene;
   let camera;
   let canvas;
   let renderer;
   let mainOBJ;
-  let theta = 0;
-  let phi = 90;
+  let theta = param.rotateT;
+  let phi = param.rotateF;
   let dt = 1;
   let period = 180;
   let now = 0;
   let scale = 1;
+  let AU = 149597870.7;
+  let perihelion = param.perihelion_distance * AU; // need to add
+  let albedo = param.albedo; // need to add
 
   function caculateMagnitude(pixels) {
-    let AU = 149597870.7;
-    let perihelion = 2 * AU; // need to add
-    let albedo = 1; // need to add
     let Dbs = Math.abs(perihelion - AU);
 
     let normalize_factor = scale;
 
     let AREA =
-      Math.pow(50, 2) * 230400 * pixels * Math.pow(normalize_factor, -2);
+      Math.pow(50, 2) / 230400 * pixels * Math.pow(normalize_factor, -2);
     let d = Math.pow(AREA / 4 / Math.PI, 0.5);
     let H = -26.74 - 5 * Math.log10((Math.pow(albedo, 0.5) * d) / 2 / AU);
     let m = H + 5 * Math.log10((perihelion * Dbs) / Math.pow(AU, 2));
@@ -134,8 +134,8 @@ function initAnimate(data) {
 
     // console.log(whitePixal, allPixal);
     if (now < 360 && whitePixal > 0) {
-      // data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
-      data.push([now++, caculateMagnitude(whitePixal)]);
+      data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
+      // data.push([now++, caculateMagnitude(whitePixal)]);
     }
   }
 
@@ -223,7 +223,7 @@ function initAnimate(data) {
   addLight();
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/kleo.obj", (obj) => {
+  objLoader.load("/static/objs/Vesta.obj", (obj) => {
     mainOBJ = obj;
     obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
     scene.add(obj);
@@ -233,24 +233,34 @@ function initAnimate(data) {
   requestAnimationFrame(render);
 }
 
-function initModel() {
+function initModel(asteriod, param) {
   const MAXSIZE = 50;
   let scene;
   let camera;
   let canvas;
   let renderer;
-  let mainOBJ;
-  let theta = 60;
-  let phi = 50;
-  let dt = 1;
-  let period = 180;
 
   function addLight() {
     const color = 0xffffff;
-    const intensity = 1;
-    const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(0, 100, 0);
-    light.target.position.set(0, -100, 0);
+    const intensity = 0.5;
+    let light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(100, 100, 0);
+    light.target.position.set(-100, -100, 0);
+    scene.add(light);
+    scene.add(light.target);
+    light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-100, 100, 0);
+    light.target.position.set(-100, -100, 0);
+    scene.add(light);
+    scene.add(light.target);
+    light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-100, -100, 0);
+    light.target.position.set(100, 100, 0);
+    scene.add(light);
+    scene.add(light.target);
+    light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(100, -100, 0);
+    light.target.position.set(-100, 100, 0);
     scene.add(light);
     scene.add(light.target);
   }
@@ -328,8 +338,7 @@ function initModel() {
   addAxes();
 
   const objLoader = new OBJLoader();
-  objLoader.load("/static/objs/kleo.obj", (obj) => {
-    mainOBJ = obj;
+  objLoader.load("/static/objs/Vesta.obj", (obj) => {
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
     addHelper(obj, true);
@@ -342,6 +351,8 @@ export default {
   components: {},
   data() {
     return {
+      param: {},
+      asteriod: {},
       description: localStorage["description"],
       asteroids_image_url: localStorage["url"],
       lightcurve_option: {
@@ -406,11 +417,19 @@ export default {
     },
   },
   mounted() {
+    // load parameter and asteroid
+    this.param = JSON.parse(localStorage.param)
+    this.asteriod = JSON.parse(localStorage.asteroid)
+
+    console.log(this.param)
+    console.log(this.asteriod)
+
+
     this.time = setInterval(this.change, 100);
 
     //Compute
-    initAnimate(this.lightcurve_option.series[0].data);
-    initModel();
+    initAnimate(this.asteriod, this.param, this.lightcurve_option.series[0].data);
+    initModel(this.asteriod, this.param);
   },
 };
 </script>
