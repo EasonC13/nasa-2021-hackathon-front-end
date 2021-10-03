@@ -7,9 +7,11 @@
 const axios = require('axios');
 import * as THREE from 'three';
 var OBJLoader = require('three-obj-loader');
+OBJLoader(THREE);
+var STLLoader = require('three-stl-loader')(THREE)
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-OBJLoader(THREE);
+
 
 const MAXSIZE = 50;
 let scene;
@@ -150,18 +152,31 @@ export default {
 
     addCamera()
     addLight()
-    // addControls();
-    // addAxes()
+    addControls();
+    addAxes()
 
-    // let objLoader = new THREE.OBJLoader();
-    // objLoader.load("/static/objs/kleo.obj", (obj) => {
-    //   mainOBJ = obj;
-    //   console.log(obj)
-    //   obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
-    //   scene.add(obj);
-    // });
-    // countPixel();
-    // requestAnimationFrame(render);
+    let path = "/static/objs/"
+    let filename="Vesta.obj"
+    // filename = 'Toutatis_hirestoutatis.obj'
+    if(filename.includes(".obj")){
+      let objLoader = new THREE.OBJLoader();
+      objLoader.load(path+filename, (obj) => {
+        mainOBJ = obj;
+        obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+        scene.add(obj);
+      });
+    }else if(filename.includes(".stl")){
+      let stlLoader = new STLLoader()
+
+      stlLoader.load(path+filename, function (geometry) {
+        var material = new THREE.MeshNormalMaterial()
+        var mesh = new THREE.Mesh(geometry, material)
+        scene.add(mesh)
+      })
+    }
+
+    countPixel();
+    requestAnimationFrame(render);
   },
   methods: {
 

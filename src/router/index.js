@@ -5,6 +5,7 @@ import Selector from '@/components/Selector'
 import Rendering from '@/components/Rendering'
 import scene_test from "@/components/Scene_Test"
 import About from "@/components/About"
+import Parameter from "@/components/Parameter"
 
 Vue.use(Router)
 
@@ -19,13 +20,18 @@ export default new Router({
       component: Selector
     },
     {
+      path: '/parameter',
+      name: 'Parameter',
+      component: Parameter
+    },
+    {
       path: '/about',
       name: 'About',
       component: About
     },
     {
-      path: '/rendering',
-      name: 'Rendering',
+      path: '/Renderer',
+      name: 'Renderer',
       component: Rendering
     },
     {

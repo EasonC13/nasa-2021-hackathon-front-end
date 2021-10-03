@@ -7,16 +7,36 @@
       </a>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li class="nav-item">
-          <router-link class="nav-link link-dark" aria-current="page" to="About">About</router-link>
+        <li class="nav-item btn" :class="{
+          'btn-light': currentRouteName=='About'}">
+          <router-link class="nav-link text-decoration-none" :class="{
+            'link-dark': currentRouteName!='About',
+            'link-primary': currentRouteName=='About'}"
+           aria-current="page" to="About">About</router-link>
         </li>
-        <li class="nav-item">
-          <router-link class="nav-link link-dark" aria-current="page" to="Selector">選取資料</router-link>
+        <li class="nav-item btn" :class="{
+          'btn-light': currentRouteName=='Selector'}">
+          <router-link class="nav-link text-decoration-none" :class="{
+            'link-dark': currentRouteName!='Selector',
+            'link-primary': currentRouteName=='Selector'}"
+           aria-current="page" to="Selector">Select Asteroid</router-link>
         </li>
-        <li class="nav-item">
-          <router-link class="nav-link link-dark" to="rendering">Rendering</router-link>
+        <li class="nav-item btn" :class="{
+          'btn-light': currentRouteName=='Parameter',
+          '': currentRouteName!='Parameter',}">
+          <router-link class="nav-link text-decoration-none" :class="{
+            'link-dark': currentRouteName!='Parameter',
+            'link-primary': currentRouteName=='Parameter'}"
+           aria-current="page" to="Parameter">Specify Parameter</router-link>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item btn" :class="{
+          'btn-light': currentRouteName=='Renderer'}">
+          <router-link class="nav-link text-decoration-none" :class="{
+            'link-dark': currentRouteName!='Renderer',
+            'link-primary': currentRouteName=='Renderer'}"
+           aria-current="page" to="Renderer">Renderer</router-link>
+        </li>
+        <li class="nav-item dropdown btn">
           <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             其他功能
           </a>
@@ -40,7 +60,15 @@
 </template>
 <script>
 export default {
-  name: "Nav"
+  name: "Nav",
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
+    },
+    have_selected_asteroid(){
+      return localStorage.asteroid == undefined
+    }
+},
 }
 </script>
 <style lang="">
