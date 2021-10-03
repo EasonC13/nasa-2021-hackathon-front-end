@@ -595,7 +595,7 @@
                     </div>
                   </div>
                   <div class="accordion-item">
-                    <h3 class="accordion-header" id="headingeight">
+                    <h3 class="accordion-header" id="heading11">
                       <div class="ps-3">
                         <button
                           class="
@@ -607,9 +607,9 @@
                           "
                           type="button"
                           data-bs-toggle="collapse"
-                          data-bs-target="#collapseeight"
+                          data-bs-target="#collapse11"
                           aria-expanded="false"
-                          aria-controls="collapseeight"
+                          aria-controls="collapse11"
                         >
                           <i class="bi bi-chevron-down"></i>
                         </button>
@@ -617,18 +617,43 @@
                           class="h4 d-inline"
                           type="button"
                           data-bs-toggle="collapse"
-                          data-bs-target="#collapseeight"
+                          data-bs-target="#collapse11"
                           aria-expanded="false"
-                          aria-controls="collapseeight"
+                          aria-controls="collapse11"
                         >
                           Rotation model
+                        </div>
+                        <div class="d-inline dropdown">
+                          <button
+                            class="btn btn-light dropdown-toggle btn-lg"
+                            type="button"
+                            id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <!-- {{ param.rotation_model }} -->
+                            1
+                          </button>
+                          <ul
+                            class="dropdown-menu"
+                            aria-labelledby="dropdownMenuButton1"
+                          >
+                            <li v-for="(cat, index) in [1, 2]" :key="index">
+                              <button
+                                class="dropdown-item btn btn-light btn-lg"
+                                @click="chageRotationModel(cat)"
+                              >
+                                {{ cat }}
+                              </button>
+                            </li>
+                          </ul>
                         </div>
                       </div>
                     </h3>
                     <div
-                      id="collapseeight"
+                      id="collapse11"
                       class="accordion-collapse collapse"
-                      aria-labelledby="headingeight"
+                      aria-labelledby="heading11"
                       data-bs-parent="#accordionExample"
                     >
                       <div class="accordion-body">
@@ -987,6 +1012,7 @@ export default {
         diameter: 0.1,
         albedo: 0,
         phase_angle: 0,
+        rotation_model: 1,
       },
       info_index: [
         "Discovered by",
@@ -1050,6 +1076,10 @@ export default {
   methods: {
     changeCat(cat) {
       this.param.category = cat;
+    },
+    chageRotationModel(cat){
+      this.param.rotation_model = cat;
+      alert(this.param.rotation_model)
     },
     pass(e) {
       // e.stopPropagation()
