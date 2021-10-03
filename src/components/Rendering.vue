@@ -40,7 +40,7 @@
         <div class="col-6 sub">
           關於此行星
           <p>
-            {{ description }}
+            {{ target_asteroid.description }}
           </p>
           <div>
             LightCurve
@@ -51,7 +51,7 @@
         </div>
         <div class="col-6 sub">
           小行星的3D Model 顯示或者是高清圖片
-          <img class="w-75" :src="asteroids_image_url" />
+          <img class="w-75" :src="target_asteroid.image_url" />
         </div>
       </div>
       <button @click="mouseover"></button>
@@ -353,8 +353,6 @@ export default {
     return {
       param: {},
       asteriod: {},
-      description: localStorage["description"],
-      asteroids_image_url: localStorage["url"],
       lightcurve_option: {
         title: {
           text: "Light curve",
@@ -431,6 +429,16 @@ export default {
     initAnimate(this.asteriod, this.param, this.lightcurve_option.series[0].data);
     initModel(this.asteriod, this.param);
   },
+  computed: {
+    target_asteroid: function(){
+      try{
+        return JSON.parse(localStorage.asteroid)
+      }catch(e){
+        alert("Please Select your asteroids first!")
+        this.$router.push({ path: 'Selector' })
+      }
+    }
+  }
 };
 </script>
 <style scoped>
