@@ -70,7 +70,6 @@
           <img class="w-75" :src="target_asteroid.picture" />
         </div>
       </div>
-      <button @click="mouseover"></button>
     </div>
   </div>
 </template>
