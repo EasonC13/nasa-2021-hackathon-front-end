@@ -12,14 +12,14 @@
           <router-link class="nav-link text-decoration-none" :class="{
             'link-dark': currentRouteName!='About',
             'link-primary': currentRouteName=='About'}"
-           aria-current="page" to="About">0.introduction</router-link>
+           aria-current="page" to="About">0. Introduction</router-link>
         </li>
         <li class="nav-item btn" :class="{
           'btn-light': currentRouteName=='Selector'}">
           <router-link class="nav-link text-decoration-none" :class="{
             'link-dark': currentRouteName!='Selector',
             'link-primary': currentRouteName=='Selector'}"
-           aria-current="page" to="Selector">1.Select Asteroid</router-link>
+           aria-current="page" to="Selector">1. Select Asteroid</router-link>
         </li>
         <li class="nav-item btn" :class="{
           'btn-light': currentRouteName=='Parameter',
@@ -27,22 +27,23 @@
           <router-link class="nav-link text-decoration-none" :class="{
             'link-dark': currentRouteName!='Parameter',
             'link-primary': currentRouteName=='Parameter'}"
-           aria-current="page" to="Parameter">2.Specify Parameter</router-link>
+           aria-current="page" to="Parameter">2. Specify Parameter</router-link>
         </li>
         <li class="nav-item btn" :class="{
           'btn-light': currentRouteName=='Renderer'}">
           <router-link class="nav-link text-decoration-none" :class="{
             'link-dark': currentRouteName!='Renderer',
             'link-primary': currentRouteName=='Renderer'}"
-           aria-current="page" to="Renderer">3.Renderer</router-link>
+           aria-current="page" to="Renderer">3. Light curve analysis</router-link>
         </li>
         <li class="nav-item dropdown btn">
           <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Others
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><router-link class="dropdown-item" to="Upload">Upload</router-link></li>
-            <li><router-link class="dropdown-item" to="question">Question</router-link></li>
+            <!-- <li><router-link class="dropdown-item" to="Upload">Upload</router-link></li> -->
+            <li><router-link class="dropdown-item" to="question">Challenge Game</router-link></li>
+            <li><router-link class="dropdown-item disabled" to="About">Contact Us</router-link></li>
             <!-- <li><router-link class="dropdown-item" to="More-Model">More Model</router-link></li> -->
             <!-- <li><hr class="dropdown-divider"></li> -->
           </ul>
@@ -50,7 +51,6 @@
       </ul>
 
       <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Contact Us</button>
         <!-- <button type="button" class="btn btn-outline-primary me-2">Login</button>
         <button type="button" class="btn btn-primary">Sign-up</button> -->
       </div>

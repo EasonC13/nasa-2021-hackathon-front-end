@@ -6,7 +6,7 @@
       data-hard-breaks="true"
     >
       <h1 id="0-Introduction" data-id="0-Introduction">
-        <span>0. Introduction</span>
+        <span>Introduction</span>
       </h1>
       <p>
         <span

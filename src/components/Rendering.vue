@@ -55,13 +55,22 @@
             <p></p>
             In astronomy, a light curve is a graph of light intensity of a
             celestial object or region, as a function of time.
+            <p></p>
+            <p>
+            <strong>x Axis</strong><br/>
+            We use A number (from zero to one) representing the angle in a periodic pattern. X Axis is time in period unit. 
+            </p>
+            <p>
+            <strong>y Axis</strong><br/>
+            Apparent magnitude ($m$) is a measure of the brightness of a star or other astronomical object observed from Earth.
+            </p>
           </div>
         </div>
         <div class="col-4 sub">
           <img class="w-75" :src="target_asteroid.picture" />
+          <img class="w-75" :src= "target_asteroid['ALCDEF DATA']" alt="">
         </div>
       </div>
-      <button @click="mouseover"></button>
     </div>
   </div>
 </template>
@@ -475,7 +484,8 @@ export default {
         },
         height: 250,
         xAxis: {
-          name: "Rational phase",
+          name: "phase θ(deg)",
+          nameLocation: "middle",
           title: "12",
           axisPointer: {
             value: 0,
@@ -497,10 +507,18 @@ export default {
           max: 360,
         },
         yAxis: {
-          name: "brightness gain",
+          name: "apparent magnitude (m)",
+          nameLocation: "middle",
           inverse: true,
-          min: "dataMin",
-          max: "dataMax",
+          min: function (value) {
+                return value.min.toFixed(2) ;
+              },
+          max: function (value) {
+                return value.max.toFixed(2) ;
+              },
+          axisLabel: {
+            inside: true
+          }
         },
         series: [
           {
