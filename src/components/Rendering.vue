@@ -251,12 +251,21 @@ function initAnimate(asteriod, param, data) {
   addVecotr();
 
   const objLoader = new OBJLoader();
-  objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
+  if(asteriod.type == "upload"){
+    var obj = objLoader.parse(localStorage.custom_obj);
     mainOBJ = obj;
-    obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
+    obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
     addHelper(obj, false);
-  });
+  }else{
+      objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
+      mainOBJ = obj;
+      obj.scale.x = obj.scale.y = obj.scale.z = scale = caculateScale(obj);
+      scene.add(obj);
+      addHelper(obj, false);
+    });
+  }
+
   countPixel();
   requestAnimationFrame(render);
 }
@@ -366,11 +375,19 @@ function initModel(asteriod, param) {
   addAxes();
 
   const objLoader = new OBJLoader();
-  objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
+  if(asteriod.type == "upload"){
+    var obj = objLoader.parse(localStorage.custom_obj);
     obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
     scene.add(obj);
-    addHelper(obj, true);
+  }else{
+    objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
+      obj.scale.x = obj.scale.y = obj.scale.z = caculateScale(obj);
+      scene.add(obj);
+      addHelper(obj, true);
   });
+  }
+
+
   requestAnimationFrame(render);
 }
 
