@@ -632,8 +632,8 @@
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                           >
-                            {{ param.rotation_model }}
-                            .
+                            {{ param.rotation_model+" " }}
+
                           </button>
                           <ul
                             class="dropdown-menu"
