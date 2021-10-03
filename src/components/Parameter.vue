@@ -401,7 +401,7 @@
                           aria-expanded="false"
                           aria-controls="wide_one"
                         >
-                          wide
+                          Wide
                         </div>
                         <div class="d-inline">
                           <input
@@ -412,9 +412,10 @@
                             max="11"
                             step="1"
                             :disabled="false"
+                            v-model="param.wide"
                           />
                         </div>
-                        5KM
+                        {{param.wide}} KM
                       </div>
                     </h3>
                     <div
@@ -1013,6 +1014,7 @@ export default {
         albedo: 0,
         phase_angle: 0,
         rotation_model: 1,
+        wide: 1,
       },
       info_index: [
         "Discovered by",
