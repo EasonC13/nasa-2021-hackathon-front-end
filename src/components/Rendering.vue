@@ -134,7 +134,8 @@ function initAnimate(asteriod, param, data) {
     }
 
     // console.log(whitePixal, allPixal);
-    if (now < 360 && whitePixal > 0) {
+    console.log(whitePixal)
+    if (now < 360 && whitePixal > 1000) {
       // data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
       data.push([now++, caculateMagnitude(whitePixal)]);
     }
@@ -143,8 +144,8 @@ function initAnimate(asteriod, param, data) {
     const color = 0xffffff;
     const intensity = 1;
     const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(0, 100, 0);
-    light.target.position.set(0, -100, 0);
+    light.position.set(0, 0, 100);
+    light.target.position.set(0, 0, -100);
     scene.add(light);
     scene.add(light.target);
   }
@@ -155,7 +156,7 @@ function initAnimate(asteriod, param, data) {
     const near = 0.01;
     const far = 1000;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(0, 100, 0);
+    camera.position.set(0, 0, 100);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
   }
 
@@ -166,16 +167,38 @@ function initAnimate(asteriod, param, data) {
     if (visible) scene.add(helper);
     var box3 = new THREE.Box3();
     box3.setFromObject(helper); // or from mesh, same answer
-    camera.position.set(0, box3.max.y + 100, 0);
+    // camera.position.set(0, box3.max.y + 100, 0);
+    camera.position.set(0, 0, box3.max.z + 100);
+  }
+
+  let arrowHelper;
+  function addVecotr(){
+    const dir = new THREE.Vector3( 0, 0, 0 );
+
+    //normalize the direction vector (convert to vector of length 1)
+    dir.normalize();
+
+    const origin = new THREE.Vector3( 0, 0, 0 );
+    const length = 100;
+    const hex = 0xffff00;
+
+    arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
+    scene.add( arrowHelper );
+  }
+
+  function addAxes() {
+    const axesHelper = new THREE.AxesHelper(100);
+    scene.add(axesHelper);
   }
 
   function animation() {
     if (mainOBJ) {
       let axis = new THREE.Vector3(
-        Math.cos(phi) * Math.sin(theta),
-        Math.sin(phi) * Math.sin(theta),
-        Math.cos(theta)
+        Math.cos(phi * Math.PI / 180) * Math.sin(theta * Math.PI / 180),
+        Math.sin(phi * Math.PI / 180) * Math.sin(theta * Math.PI / 180),
+        Math.cos(theta * Math.PI / 180)
       );
+      arrowHelper.setDirection(axis.normalize());
       mainOBJ.rotateOnAxis(axis, Math.PI / 180);
     }
   }
@@ -221,6 +244,8 @@ function initAnimate(asteriod, param, data) {
 
   addCamera();
   addLight();
+  addAxes();
+  addVecotr();
 
   const objLoader = new OBJLoader();
   objLoader.load(`/static/objs/${asteriod['3D model filename']}`, (obj) => {
@@ -271,7 +296,7 @@ function initModel(asteriod, param) {
     const near = 0.01;
     const far = 1000;
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(0, 100, 0);
+    camera.position.set(0, 0, 100);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
   }
 
@@ -292,7 +317,7 @@ function initModel(asteriod, param) {
     if (visible) scene.add(helper);
     var box3 = new THREE.Box3();
     box3.setFromObject(helper); // or from mesh, same answer
-    camera.position.set(0, box3.max.y + 100, 0);
+    camera.position.set(0, 0, box3.max.z + 100);
   }
 
   function caculateScale(obj) {
