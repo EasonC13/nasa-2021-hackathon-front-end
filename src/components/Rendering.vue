@@ -184,7 +184,7 @@ function initAnimate(asteriod, param, data) {
     dir.normalize();
 
     const origin = new THREE.Vector3( 0, 0, 0 );
-    const length = 100;
+    const length = 1000;
     const hex = 0xffff00;
 
     arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
@@ -199,9 +199,9 @@ function initAnimate(asteriod, param, data) {
   function animation() {
     if (mainOBJ) {
       let axis = new THREE.Vector3(
-        Math.cos(phi * Math.PI / 180) * Math.sin(theta * Math.PI / 180),
-        Math.sin(phi * Math.PI / 180) * Math.sin(theta * Math.PI / 180),
-        Math.cos(theta * Math.PI / 180)
+        Math.sin(phi  * Math.PI / 180) * Math.sin(theta  * Math.PI / 180),
+        Math.cos(theta  * Math.PI / 180),
+        Math.cos(phi  * Math.PI / 180) * Math.sin(theta  * Math.PI / 180)
       );
       arrowHelper.setDirection(axis.normalize());
       mainOBJ.rotateOnAxis(axis, Math.PI / 180);
