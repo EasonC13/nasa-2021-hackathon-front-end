@@ -41,7 +41,7 @@
           <p class='h2'>About</p>
 
           <p>
-            {{ target_asteroid.description }}
+            {{ target_asteroid.Description }}
           </p>
           <div>
             LightCurve
@@ -52,7 +52,7 @@
         </div>
         <div class="col-6 sub">
 
-          <img class="w-75" :src="target_asteroid.image_url" />
+          <img class="w-75" :src="target_asteroid.picture" />
         </div>
       </div>
       <button @click="mouseover"></button>
