@@ -68,6 +68,7 @@
         </div>
         <div class="col-4 sub">
           <img class="w-75" :src="target_asteroid.picture" />
+          <img class="w-75" :src = "target_asteroid['ALCDEF DATA']" alt="">
         </div>
       </div>
     </div>

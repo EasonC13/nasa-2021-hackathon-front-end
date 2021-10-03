@@ -487,7 +487,7 @@
                         Sun-object-observer.In order to simplify the problem, we
                         set the phase angle = 0 and the asteroid is in
                         conditions of ideal solar opposition.
-                        <br /><img
+                        <img
                           src="https://i.imgur.com/psOphVP.png"
                           alt=""
                           class="intro_img"
@@ -495,7 +495,6 @@
                       </div>
                     </div>
                   </div>
-                  <!--=================================-->
                   <div class="accordion-item">
                     <h3 class="accordion-header" id="headingSeven">
                       <div class="ps-3">
@@ -523,7 +522,7 @@
                           aria-expanded="false"
                           aria-controls="collapseSeven"
                         >
-                          Rotation Period (hr)
+                          Rotation Period = {{ target_asteroid["Rotation period(hr)"]}} (hr)
                         </div>
                       </div>
                     </h3>
@@ -1051,6 +1050,6 @@ export default {
   box-shadow: none;
 }
 .intro_img {
-  width: 100%;
+  width: 90%;
 }
 </style>
