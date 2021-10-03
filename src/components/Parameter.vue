@@ -1041,7 +1041,8 @@ export default {
       this.param.albedo = target_asteroid["albedo"] || default_param["albedo"];
       this.param.phase_angle = 0;
     }
-    if (this.param.category == "" || this.param.category == "user define") {
+    if (this.param.category == "" || this.param.category == "user define" || this.param.category == undefined) {
+
       this.param.category = this.categories[0];
     }
     console.log(this.param);
