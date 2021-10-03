@@ -18,6 +18,7 @@
     "three-stl-loader": "^1.0.6",
     "vue": "^2.5.2",
     "vue-echarts": "^6.0.0",
+    "vue-mathjax": "0.0.11",
     "vue-router": "^3.0.1",
     "vue-simple-uploader": "^0.7.6"
   },

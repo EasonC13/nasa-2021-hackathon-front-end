@@ -417,12 +417,10 @@ export default {
 <style scoped>
 .main {
   height: 800px;
-  border: solid;
 }
 
 .sub {
   height: 400px;
-  border: solid;
 }
 
 #animate {

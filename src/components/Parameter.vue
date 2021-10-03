@@ -1,4 +1,5 @@
 <template>
+
   <div class="container">
     <div>
       <div class="clearfix">
@@ -48,7 +49,7 @@
                     </h3>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <vue-mathjax :formula="formula"></vue-mathjax>
                       </div>
                     </div>
                   </div>
@@ -125,16 +126,28 @@
                   </div>
 
                 </div>
-
-
               </div>
-
             </div>
             <div class="col-sm-12 col-md-6">
               <p class="h5">The astroid you select is
                 <a :href="target_asteroid.read_more">{{target_asteroid.name}}</a>
               </p>
               <img class="w-100" :src="target_asteroid.image_url" alt="Card image cap">
+              <div class="accordion" id="Parameter">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="intro_headingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#intro_collapseOne" aria-expanded="true" aria-controls="intro_collapseOne">
+                        Astroid NAME
+                      </button>
+                    </h2>
+                    <div id="intro_collapseOne" class="accordion-collapse collapse show" aria-labelledby="intro_headingOne" data-bs-parent="#Parameter">
+                      <div class="accordion-body">
+                        A newly discovered asteroid is given a provisional designation (such as 2002 AT4) consisting of the year of discovery and an alphanumeric code indicating the half-month of discovery and the sequence within that half-month. Once an asteroid’s orbit has been confirmed, it is given a number, and later may also be given a name (e.g. 433 Eros). The formal naming convention uses parentheses around the number – e.g. (433) Eros – but dropping the parentheses is quite common. Informally, it is common to drop the number altogether, or to drop it after the first mention when a name is repeated in running text. In addition, names can be proposed by the asteroid’s discoverer, within guidelines established by the International Astronomical Union. 
+                        <a href="https://en.wikipedia.org/wiki/Asteroid">ref</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -143,9 +156,11 @@
   </div>
 </template>
 <script>
+import { VueMathjax } from "vue-mathjax";
 export default {
   name: "Parameter",
   components: {
+    "vue-mathjax": VueMathjax
   },
   data () {
     return {
@@ -157,6 +172,7 @@ export default {
         avg_semi_major_axis: 0,
         radius: 1,
         absolute_magnitude: 0,
+        formula: "$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$",
       },
     }
   },
