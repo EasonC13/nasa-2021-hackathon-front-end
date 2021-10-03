@@ -8,6 +8,7 @@ import About from "@/components/About"
 import Parameter from "@/components/Parameter"
 import question from "@/components/question"
 import Upload from "@/components/Upload"
+import MoreModel from "@/components/MoreModel"
 
 Vue.use(Router)
 
@@ -50,6 +51,11 @@ export default new Router({
       path: '/upload',
       name: 'Upload',
       component: Upload
+    },
+    {
+      path: '/more-model',
+      name: 'MoreModel',
+      component: MoreModel
     },
   ]
 })

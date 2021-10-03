@@ -29,7 +29,11 @@
 
             <label for="input_asteroid_file" class="form-label">Object File</label>
             <input type="file" accept=".obj" fileCount=1 id="input_asteroid_file" class="mb-3" aria-label=""
-             @change="handleUpload($event.target.files)" v-show='true'>
+             @change="handleUpload($event.target.files)" v-show='true' v-if="show_upload_file">
+
+            <label for="input_asteroid_name" class="form-label">Dscription</label>
+            <input id="input_asteroid_name" class="form-control mb-3" type="text"
+            placeholder="type a name..." aria-label="" v-model="obj.Description">
 
             <!-- <label for="input_asteroid_file" class="form-label">Custom Image (optional)</label>
             <input type="file" accept=".obj" fileCount=1 id="input_asteroid_file" class="" aria-label=""
@@ -66,8 +70,10 @@ export default {
         Description: "",
         "3D model link": false,
         "Wiki_Link": false,
-        hash: ""
+        hash: "",
+        category: ""
       },
+      show_upload_file: true,
     }
   },
   computed: {
@@ -79,11 +85,26 @@ export default {
 
   },
   methods: {
-    async handleUpload(file){
+    async handleUpload(files){
+      let file = files[0]
+      if(file.size > 2000000){
+        alert("File size must be smaller than 2mb.\nPlase upload other one.")
+        this.show_upload_file = false
+        setTimeout(() => {
+          this.show_upload_file = true
+        }, 0.0001)
+        return 0
+      }
+
       try{
-        file = file[0]
         this.obj.file_text = await file.text()
-      }catch(e){}
+      }catch(e){
+        alert("Plase choose other file")
+        this.show_upload_file = false
+        setTimeout(() => {
+          this.show_upload_file = true
+        }, 0.0001)
+      }
     },
     upload(){
       let previous = []
