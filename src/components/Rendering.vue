@@ -65,24 +65,24 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-function initAnimate(data) {
+function initAnimate(asteriod, param, data) {
   const MAXSIZE = 50;
   let scene;
   let camera;
   let canvas;
   let renderer;
   let mainOBJ;
-  let theta = 0;
-  let phi = 90;
+  let theta = param.rotateT;
+  let phi = param.rotateF;
   let dt = 1;
   let period = 180;
   let now = 0;
   let scale = 1;
+  let AU = 149597870.7;
+  let perihelion = param.perihelion_distance * AU; // need to add
+  let albedo = param.albedo; // need to add
 
   function caculateMagnitude(pixels) {
-    let AU = 149597870.7;
-    let perihelion = 2 * AU; // need to add
-    let albedo = 1; // need to add
     let Dbs = Math.abs(perihelion - AU);
 
     let normalize_factor = scale;
@@ -134,8 +134,8 @@ function initAnimate(data) {
 
     // console.log(whitePixal, allPixal);
     if (now < 360 && whitePixal > 0) {
-      // data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
-      data.push([now++, caculateMagnitude(whitePixal)]);
+      data.push([now++, ((whitePixal / 230400) * 2 - 1) * 20]);
+      // data.push([now++, caculateMagnitude(whitePixal)]);
     }
   }
 
@@ -233,7 +233,7 @@ function initAnimate(data) {
   requestAnimationFrame(render);
 }
 
-function initModel() {
+function initModel(asteriod, param) {
   const MAXSIZE = 50;
   let scene;
   let camera;
@@ -412,12 +412,15 @@ export default {
     this.param = JSON.parse(localStorage.param)
     this.asteriod = JSON.parse(localStorage.asteroid)
 
+    console.log(this.param)
+    console.log(this.asteriod)
+
 
     this.time = setInterval(this.change, 100);
 
     //Compute
-    initAnimate(this.lightcurve_option.series[0].data);
-    initModel();
+    initAnimate(this.asteriod, this.param, this.lightcurve_option.series[0].data);
+    initModel(this.asteriod, this.param);
   },
 };
 </script>
