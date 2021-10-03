@@ -495,36 +495,130 @@
                       </div>
                     </div>
                   </div>
+                  <!--=================================-->
+                  <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingSeven">
+                      <div class="ps-3">
+                        <button
+                          class="
+                            float-end
+                            btn
+                            button-light
+                            d-inline
+                            no-focus-btn
+                          "
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseSeven"
+                          aria-expanded="false"
+                          aria-controls="collapseSeven"
+                        >
+                          <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div
+                          class="h4 d-inline"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseSeven"
+                          aria-expanded="false"
+                          aria-controls="collapseSeven"
+                        >
+                          Rotation Period (hr)
+                        </div>
+                      </div>
+                    </h3>
+                    <div
+                      id="collapseSeven"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingSeven"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div class="accordion-body">
+                        The rotation period of the asteroid around Rotation axis
+                        vector where is angular speed direction,
+                        counterclockwisely.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingeight">
+                      <div class="ps-3">
+                        <button
+                          class="
+                            float-end
+                            btn
+                            button-light
+                            d-inline
+                            no-focus-btn
+                          "
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseeight"
+                          aria-expanded="false"
+                          aria-controls="collapseeight"
+                        >
+                          <i class="bi bi-chevron-down"></i>
+                        </button>
+                        <div
+                          class="h4 d-inline"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseeight"
+                          aria-expanded="false"
+                          aria-controls="collapseeight"
+                        >
+                          Rotation model
+                        </div>
+                      </div>
+                    </h3>
+                    <div
+                      id="collapseeight"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingeight"
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div class="accordion-body">
+                        <p>
+                          Rotation model 1 : Rotation around a fixed axis
+                          (special case: non-physical model)
+                        </p>
+                        We assume that the motion of asteroid is rotation around
+                        a fixed axis to simplify the setting and calculation.
+                        This setting is not the true rotation motion of the
+                        asteroid. Really rotating motion, the axis of rotation
+                        will also rotate, especially the rod-shaped or flatter
+                        (non-spherical)
+                        <a
+                          href="https://www.youtube.com/watch?v=9QXRIinrGS0&ab_channel=RussEdmonds"
+                          >example</a
+                        >
+                        , but to calculate this requires numerical integration
+                        of the asteroid’s moment of inertia. Some of the moment
+                        of inertia distribution does not have an analytical
+                        solution, and it is necessary to solve the Euler
+                        equation numerically:
+                        <a href="https://www.youtube.com/watch?v=1VPfZ_XzisU"
+                          >Veritasium介紹The Bizarre Behavior of Rotating
+                          Bodies</a
+                        >
+                        <br /><br />
+                        <p>
+                          Rotation model 2 : Symmetric top precession model
+                          (physical model)
+                        </p>
+                        In order to simplify the calculation complexity under
+                        the physical conditions, we assume such a model based on
+                        the geometric configuration of the asteroid. This model
+                        is the simplest model that can simulate precession.
+                        Assuming that the object is axisymmetric, I1 = 12 is not
+                        equal to I3.
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-sm-12 col-md-6">
-              <p class="h5">
-                The astroid you select is
-                <a :href="target_asteroid.Wiki_Link" target="_blank">{{
-                  target_asteroid.Name
-                }}</a>
-              </p>
-              <!-- <img class="w-100" :src="target_asteroid.picture" alt="Card image cap"> -->
-              <canvas class="w-100" id="animate"></canvas>
-              <div class="clearfix">
-                <p class="lead float-end">
-                  {{ target_asteroid.Description }}
-                  <a
-                    class="btn btn-light"
-                    :href="target_asteroid.Wiki_Link"
-                    target="_blank"
-                    >read more</a
-                  >
-                  <a
-                    class="btn btn-light"
-                    :href="target_asteroid['3D model link']"
-                    target="_blank"
-                    >Download Model</a
-                  >
-                </p>
-              </div>
-
               <div class="accordion" id="Parameter">
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="intro_headingOne">
@@ -536,7 +630,7 @@
                       aria-expanded="true"
                       aria-controls="intro_collapseOne"
                     >
-                      Astroid NAME
+                      {{ target_asteroid["#"] + target_asteroid.Name }}
                     </button>
                   </h2>
                   <div
@@ -564,89 +658,37 @@
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="intro_headingTwo">
-                    <button
-                      class="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#intro_collapseTwo"
-                      aria-expanded="true"
-                      aria-controls="intro_collapseTwo"
-                    >
-                      Rotation Period (hr)
-                    </button>
-                  </h2>
-                  <div
-                    id="intro_collapseTwo"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="intro_headingTwo"
-                    data-bs-parent="#Parameter"
-                  >
-                    <div class="accordion-body">
-                      The rotation period of the asteroid around Rotation axis
-                      vector where is angular speed direction,
-                      counterclockwisely.
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="intro_headingThree">
-                    <button
-                      class="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#intro_collapseThree"
-                      aria-expanded="true"
-                      aria-controls="intro_collapseThree"
-                    >
-                      Rotation model
-                    </button>
-                  </h2>
-                  <div
-                    id="intro_collapseThree"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="intro_headingThree"
-                    data-bs-parent="#Parameter"
-                  >
-                    <div class="accordion-body">
-                      <p>
-                        Rotation model 1 : Rotation around a fixed axis (special
-                        case: non-physical model)
-                      </p>
-                      We assume that the motion of asteroid is rotation around a
-                      fixed axis to simplify the setting and calculation. This
-                      setting is not the true rotation motion of the asteroid.
-                      Really rotating motion, the axis of rotation will also
-                      rotate, especially the rod-shaped or flatter
-                      (non-spherical)
-                      <a
-                        href="https://www.youtube.com/watch?v=9QXRIinrGS0&ab_channel=RussEdmonds"
-                        >example</a
-                      >
-                      , but to calculate this requires numerical integration of
-                      the asteroid’s moment of inertia. Some of the moment of
-                      inertia distribution does not have an analytical solution,
-                      and it is necessary to solve the Euler equation
-                      numerically:
-                      <a href="https://www.youtube.com/watch?v=1VPfZ_XzisU"
-                        >Veritasium介紹The Bizarre Behavior of Rotating
-                        Bodies</a
-                      >
-                      <br /><br />
-                      <p>
-                        Rotation model 2 : Symmetric top precession model
-                        (physical model)
-                      </p>
-                      In order to simplify the calculation complexity under the
-                      physical conditions, we assume such a model based on the
-                      geometric configuration of the asteroid. This model is the
-                      simplest model that can simulate precession. Assuming that
-                      the object is axisymmetric, I1 = 12 is not equal to I3.
-                    </div>
-                  </div>
-                </div>
               </div>
+              <img
+                class="w-100"
+                :src="target_asteroid.picture"
+                alt="Card image cap"
+              />
+              <div class="clearfix">
+                <p class="lead float-end">
+                  {{ target_asteroid.Description }}
+                  <a
+                    class="btn btn-light"
+                    :href="target_asteroid.Wiki_Link"
+                    target="_blank"
+                    >read more</a
+                  >
+                  <a
+                    class="btn btn-light"
+                    :href="target_asteroid['3D model link']"
+                    target="_blank"
+                    >Download Model</a
+                  >
+                </p>
+              </div>
+              <table class="table table-striped">
+                <tbody>
+                  <tr :key="key" v-for="key in info_index">
+                    <td>{{ key }}</td>
+                    <td>{{ target_asteroid[key] }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -887,6 +929,14 @@ export default {
         albedo: 0,
         phase_angle: 0,
       },
+      info_index: [
+        "Discovered by",
+        "Discovered date",
+        "long (km)",
+        "perihelion distance (AU)",
+        "Asteroid category",
+        "Absolute magnitude (H)",
+      ],
     };
   },
   watch: {
