@@ -4,12 +4,12 @@
       <h2 class="">
         Renderer
         <div class="float-end align-">
-          <router-link class="btn btn-light me-2" to="Parameter"
-            >Back</router-link
-          >
-          <router-link class="btn btn-primary me-2" to="Selector"
-            >Select New</router-link
-          >
+          <router-link class="btn btn-light me-2" to="Parameter">
+            Back
+          </router-link>
+          <router-link class="btn btn-primary me-2" to="Selector">
+            Select New
+          </router-link>
         </div>
       </h2>
     </div>

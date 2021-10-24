@@ -415,7 +415,7 @@
                             v-model="param.wide"
                           />
                         </div>
-                        {{param.wide}} KM
+                        {{ param.wide }} KM
                       </div>
                     </h3>
                     <div
@@ -425,7 +425,9 @@
                       data-bs-parent="#accordionExample"
                     >
                       <div class="accordion-body">
-                        In order to simulate the Symmetric top precession model, we use 'wide' as 2*semiaxis of  the symmetry side (a, b). This parameter is disabled when you use model 1.
+                        In order to simulate the Symmetric top precession model,
+                        we use 'wide' as 2*semiaxis of the symmetry side (a, b).
+                        This parameter is disabled when you use model 1.
                       </div>
                     </div>
                   </div>
@@ -497,120 +499,6 @@
                       </div>
                     </div>
                   </div>
-
-                  <div class="accordion-item">
-                    <h3 class="accordion-header" id="headingSix">
-                      <div class="ps-3">
-                        <button
-                          class="
-                            float-end
-                            btn
-                            button-light
-                            d-inline
-                            no-focus-btn
-                          "
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseSix"
-                          aria-expanded="false"
-                          aria-controls="collapseSix"
-                        >
-                          <i class="bi bi-chevron-down"></i>
-                        </button>
-                        <div
-                          class="h4 d-inline"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseSix"
-                          aria-expanded="false"
-                          aria-controls="collapseSix"
-                        >
-                          Phase angle δ= {{ param.phase_angle }} °
-                        </div>
-                      </div>
-                    </h3>
-                    <div
-                      id="collapseSix"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingSix"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        Phase angle in astronomical observations is the angle
-                        between the light incident onto an observed object and
-                        the light reflected from the object. In the context of
-                        astronomical observations, this is usually the angle
-                        Sun-object-observer.In order to simplify the problem, we
-                        set the phase angle = 0 and the asteroid is in
-                        conditions of ideal solar opposition.
-                        <img
-                          src="https://i.imgur.com/psOphVP.png"
-                          alt=""
-                          class="intro_img"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="accordion-item">
-                    <h3 class="accordion-header" id="headingSeven">
-                      <div class="ps-3">
-                        <button
-                          class="
-                            float-end
-                            btn
-                            button-light
-                            d-inline
-                            no-focus-btn
-                          "
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseSeven"
-                          aria-expanded="false"
-                          aria-controls="collapseSeven"
-                        >
-                          <i class="bi bi-chevron-down"></i>
-                        </button>
-                        <div
-                          class="h4 d-inline"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseSeven"
-                          aria-expanded="false"
-                          aria-controls="collapseSeven"
-                          v-if="can_edit_rotation_period"
-                        >
-                          Rotation Period = {{ target_asteroid["Rotation period(hr)"]}} (hr)
-                        </div>
-                        <div
-                          class="h4 d-inline"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseSeven"
-                          aria-expanded="false"
-                          aria-controls="collapseSeven"
-                          v-if="can_edit_rotation_period==false"
-                        >
-                          Rotation Period uneditable
-                        </div>
-                      </div>
-                    </h3>
-                    <div
-                      id="collapseSeven"
-                      class="accordion-collapse collapse"
-                      aria-labelledby="headingSeven"
-                      data-bs-parent="#accordionExample"
-                    >
-                      <div class="accordion-body">
-                        <p>The rotation period of the asteroid around Rotation axis
-                        vector where is angular speed direction,
-                        counterclockwisely. </p>
-                        <p>
-                          Rotation period's value can't be edit at custom asteroid object.
-                        </p>
-
-                      </div>
-                    </div>
-                  </div>
                   <div class="accordion-item">
                     <h3 class="accordion-header" id="heading11">
                       <div class="ps-3">
@@ -648,8 +536,7 @@
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                           >
-                            {{ param.rotation_model+" " }}
-
+                            {{ param.rotation_model + " " }}
                           </button>
                           <ul
                             class="dropdown-menu"
@@ -712,26 +599,33 @@
                     </div>
                   </div>
                 </div>
+                <Fixparameter :can_edit_rotation_period="can_edit_rotation_period"></Fixparameter>
               </div>
             </div>
             <div class="col-sm-12 col-md-6">
               <div class="accordion" id="Parameter">
                 <div class="accordion-item">
-                  <button class="btn  w-100 text-start clearfix" id="intro_headingOne" data-bs-toggle="collapse"
-                      data-bs-target="#intro_collapseOne"
-                      aria-expanded="true"
-                      aria-controls="intro_collapseOne">
-                  <h2 class="accordion-header float-start" v-if='target_asteroid["#"]!=undefined'>
-
+                  <button
+                    class="btn w-100 text-start clearfix"
+                    id="intro_headingOne"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#intro_collapseOne"
+                    aria-expanded="true"
+                    aria-controls="intro_collapseOne"
+                  >
+                    <h2
+                      class="accordion-header float-start"
+                      v-if="target_asteroid['#'] != undefined"
+                    >
                       {{ target_asteroid["#"] + " " + target_asteroid.Name }}
-
-                  </h2>
-                  <h2 class="accordion-header float-start" v-if='target_asteroid["#"]==undefined'>
-
+                    </h2>
+                    <h2
+                      class="accordion-header float-start"
+                      v-if="target_asteroid['#'] == undefined"
+                    >
                       {{ target_asteroid.Name }}
-
-                  </h2>
-                  <i class="bi bi-question-circle float-end h2"></i>
+                    </h2>
+                    <i class="bi bi-question-circle float-end h2"></i>
                   </button>
                   <div
                     id="intro_collapseOne"
@@ -753,8 +647,13 @@
                       after the first mention when a name is repeated in running
                       text. In addition, names can be proposed by the asteroid’s
                       discoverer, within guidelines established by the
-                      International Astronomical Union. <a target="_blank"
-                      class="" href="https://en.wikipedia.org/wiki/Asteroid">(know more)</a>
+                      International Astronomical Union.
+                      <a
+                        target="_blank"
+                        class=""
+                        href="https://en.wikipedia.org/wiki/Asteroid"
+                        >(know more)</a
+                      >
                     </div>
                   </div>
                 </div>
@@ -796,7 +695,7 @@
 <script>
 import * as THREE from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
-
+import Fixparameter from "@/components/Fixparameter.vue";
 function initAnimate(asteriod, param, data) {
   const MAXSIZE = 50;
   let scene;
@@ -1003,7 +902,9 @@ function initAnimate(asteriod, param, data) {
 
 export default {
   name: "Parameter",
-  components: {},
+  components: {
+    Fixparameter,
+  },
   data() {
     return {
       step_instruction: "Specify Parameter",
@@ -1058,7 +959,9 @@ export default {
     },
   },
   mounted() {
-    this.can_edit_rotation_period = this.categories.includes(this.target_asteroid.category)
+    this.can_edit_rotation_period = this.categories.includes(
+      this.target_asteroid.category
+    );
 
     let default_param = Object.assign(this.param);
     try {
@@ -1082,8 +985,11 @@ export default {
       this.param.albedo = target_asteroid["albedo"] || default_param["albedo"];
       this.param.phase_angle = 0;
     }
-    if (this.param.category == "" || this.param.category == "user define" || this.param.category == undefined) {
-
+    if (
+      this.param.category == "" ||
+      this.param.category == "user define" ||
+      this.param.category == undefined
+    ) {
       this.param.category = this.categories[0];
     }
     console.log(this.param);
@@ -1092,7 +998,7 @@ export default {
     changeCat(cat) {
       this.param.category = cat;
     },
-    chageRotationModel(cat){
+    chageRotationModel(cat) {
       this.param.rotation_model = cat;
     },
     pass(e) {
