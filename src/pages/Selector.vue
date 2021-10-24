@@ -16,33 +16,27 @@
             </div>
         </h2>
       </div>
-      <div>
-        <div>
-          <div class="overflow-scroll">
-            <div class="row" style="height: 75vh">
-              <Upload></Upload>
 
-
-              <div class="col-md-4 col-sm-12 col-lg-3" style="padding-bottom: 1%;"
-              v-for="(asteroid, index) in asteroids"
-              :key=index @click="select(index)">
-                <div class="card" :class="{
-                  card_selected: index==select_index,
-                  card_unselected: index!=select_index,}">
-                  <img class="card-img-top" :src="asteroid.picture" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">{{asteroid.Name}}</h5>
-                    <p v-if='asteroid["Asteroid category"]'>Category: {{asteroid["Asteroid category"]}}</p>
-                    <p v-if='asteroid.type=="upload"'>Custom Upload Object</p>
-                    <p class="card-text">{{asteroid.Description.substring(0, 150) + " "}}
-                      <a :href="asteroid.Wiki_Link" target="_blank" class="text-secondary" v-if="asteroid.Wiki_Link">...more</a></p>
-                    <div class="text-end" v-if="asteroid.Wiki_Link">
-                      <a :href="asteroid.Wiki_Link" target="_blank" class="float-right">Know more</a>
-                    </div>
-                  </div>
+      <div class="overflow-scroll">
+        <div class="row" style="height: 75vh">
+          <Upload></Upload>
+          <div class="col-md-4 col-sm-12 col-lg-3" style="padding-bottom: 1%;"
+          v-for="(asteroid, index) in asteroids"
+          :key=index @click="select(index)">
+            <div class="card" :class="{
+              card_selected: index==select_index,
+              card_unselected: index!=select_index,}">
+              <img class="card-img-top" :src="asteroid.picture" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{asteroid.Name}}</h5>
+                <p v-if='asteroid["Asteroid category"]'>Category: {{asteroid["Asteroid category"]}}</p>
+                <p v-if='asteroid.type=="upload"'>Custom Upload Object</p>
+                <p class="card-text">{{asteroid.Description.substring(0, 150) + " "}}
+                  <a :href="asteroid.Wiki_Link" target="_blank" class="text-secondary" v-if="asteroid.Wiki_Link">...more</a></p>
+                <div class="text-end" v-if="asteroid.Wiki_Link">
+                  <a :href="asteroid.Wiki_Link" target="_blank" class="float-right">Know more</a>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -51,8 +45,8 @@
   </div>
 </template>
 <script>
-import Upload from "./Upload.vue"
-import MoreModel from "./MoreModel.vue"
+import Upload from "@/components/Upload.vue"
+import MoreModel from "@/components/MoreModel.vue"
 export default {
   name: "Selector",
   components: {

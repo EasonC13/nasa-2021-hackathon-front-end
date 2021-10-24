@@ -759,11 +759,7 @@
                   </div>
                 </div>
               </div>
-              <!-- <img
-                class="w-100"
-                :src="target_asteroid.picture"
-                alt="Card image cap"
-              /> -->
+
               <canvas class="w-100" id="animate"></canvas>
               <div class="clearfix">
                 <p class="lead float-end">
@@ -800,8 +796,6 @@
 <script>
 import * as THREE from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
-import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 function initAnimate(asteriod, param, data) {
   const MAXSIZE = 50;
